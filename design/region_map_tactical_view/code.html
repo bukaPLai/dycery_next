@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#060e20",
+              "surface-container-high": "#222a3d",
+              "secondary": "#ffb95f",
+              "on-primary-fixed": "#23005c",
+              "on-error": "#690005",
+              "primary-container": "#a078ff",
+              "surface-dim": "#0b1326",
+              "secondary-container": "#ee9800",
+              "surface-container": "#171f33",
+              "on-background": "#dae2fd",
+              "on-secondary": "#472a00",
+              "surface-container-highest": "#2d3449",
+              "inverse-primary": "#6d3bd7",
+              "inverse-on-surface": "#283044",
+              "on-tertiary-container": "#5c0008",
+              "on-surface-variant": "#cbc3d7",
+              "outline-variant": "#494454",
+              "on-primary-container": "#340080",
+              "on-tertiary-fixed-variant": "#930013",
+              "surface-bright": "#31394d",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#d0bcff",
+              "surface-container-low": "#131b2e",
+              "on-secondary-fixed-variant": "#653e00",
+              "outline": "#958ea0",
+              "on-primary": "#3c0091",
+              "tertiary-container": "#ff5451",
+              "secondary-fixed-dim": "#ffb95f",
+              "primary-fixed-dim": "#d0bcff",
+              "primary-fixed": "#e9ddff",
+              "primary": "#d0bcff",
+              "on-tertiary": "#68000a",
+              "on-primary-fixed-variant": "#5516be",
+              "tertiary-fixed-dim": "#ffb3ad",
+              "surface-variant": "#2d3449",
+              "on-secondary-fixed": "#2a1700",
+              "error": "#ffb4ab",
+              "on-surface": "#dae2fd",
+              "inverse-surface": "#dae2fd",
+              "tertiary-fixed": "#ffdad7",
+              "on-tertiary-fixed": "#410004",
+              "error-container": "#93000a",
+              "background": "#0b1326",
+              "secondary-fixed": "#ffddb8",
+              "surface": "#0b1326",
+              "tertiary": "#ffb3ad",
+              "on-secondary-container": "#5b3800"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .map-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+        }
+        .scanline {
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 selection:text-primary min-h-screen overflow-hidden">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-3 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 shadow-2xl shadow-violet-500/10 font-['Space_Grotesk'] antialiased">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-violet-500">Dycery Terminal</span>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-slate-400 hover:text-slate-200 transition-colors cursor-pointer">Campaign</span>
+<span class="text-slate-400 hover:text-slate-200 transition-colors cursor-pointer">Timer</span>
+<span class="text-violet-400 font-bold border-b-2 border-violet-500 pb-1 cursor-default">Round: 1</span>
+<span class="text-slate-400 hover:text-slate-200 transition-colors cursor-pointer">Code: XY7Z</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-slate-800/50 rounded-lg transition-all p-2 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-slate-400">help</span>
+</button>
+<button class="hover:bg-slate-800/50 rounded-lg transition-all p-2 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-slate-400">settings</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 flex flex-col pt-16 pb-8 bg-slate-950 border-r border-slate-800 shadow-right-xl font-['Space_Grotesk'] text-sm">
+<div class="px-6 py-4 mb-4">
+<div class="text-lg font-black text-violet-500">Dycery Terminal</div>
+<div class="text-[10px] text-slate-500 tracking-widest uppercase">Region Map Active</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:text-slate-300 hover:bg-slate-900 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">casino</span>
+<span>Dice Roller</span>
+</div>
+<div class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:text-slate-300 hover:bg-slate-900 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">format_list_numbered</span>
+<span>Initiative</span>
+</div>
+<div class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:text-slate-300 hover:bg-slate-900 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">assignment</span>
+<span>Active Quests</span>
+</div>
+<div class="flex items-center gap-3 bg-violet-500/10 text-violet-400 border-r-4 border-violet-500 px-4 py-3 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">map</span>
+<span>Map</span>
+</div>
+<div class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:text-slate-300 hover:bg-slate-900 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">group</span>
+<span>NPCs</span>
+</div>
+<div class="flex items-center gap-3 text-slate-500 px-4 py-3 hover:text-slate-300 hover:bg-slate-900 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">pest_control</span>
+<span>Bestiary</span>
+</div>
+</nav>
+<div class="px-6 mt-auto">
+<div class="p-3 bg-surface-container-high rounded-lg border border-outline-variant/30">
+<div class="text-[10px] text-secondary font-bold mb-1">SYSTEM STATUS</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-xs text-slate-300">Syncing Data...</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 mt-14 h-[calc(100vh-3.5rem)] relative overflow-hidden bg-surface-container-lowest">
+<!-- Region Map Background -->
+<div class="absolute inset-0 z-0 overflow-hidden bg-slate-950">
+<div class="absolute inset-0 map-grid opacity-30"></div>
+<div class="absolute inset-0 scanline opacity-5 pointer-events-none"></div>
+<!-- Map Visualization -->
+<div class="relative w-full h-full flex items-center justify-center">
+<div class="w-full h-full relative" data-location="The Whispering Woods" style="">
+<img alt="Top-down dark fantasy topographical map of a dense forest with rivers and mystical glowing elements" class="w-full h-full object-cover mix-blend-luminosity opacity-40 grayscale" data-alt="Top-down dark fantasy topographical map of a dense forest with rivers and mystical glowing elements in deep purples and muted slate tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSsfpWzpYuBE9hFa7ITXVwRWadlHCmgaeJHeD389pnv1fOs1k_O7bu45aNrXC97H0hh3-fVFNgWV9X4P2aYZ71STerovXDb0A1edZ-tRZmcR9tDggPfFgYMtk9TSHTm4_a3YTRVKam_OyGb0BD1ecftEtIK_puaJ9Q-lKrom-BgQ98x6MFrhGRzQKMUh8-zF80gevt2cIMVZ0prY7GMgB0UvhldzHfoB2UWhIdt-eu5lrf6WFkqoNcF8xlbAJE2AD5jnZahANav9TY"/>
+<!-- Tactical Markers -->
+<!-- Marker 1: Village -->
+<div class="absolute top-[40%] left-[30%] group">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-12 h-12 bg-secondary/20 rounded-full animate-ping"></div>
+<div class="w-8 h-8 bg-surface-container-highest border-2 border-secondary rounded-full flex items-center justify-center text-secondary shadow-[0_0_15px_rgba(245,158,11,0.5)] cursor-pointer z-10 transition-transform hover:scale-110">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+</div>
+<div class="absolute left-10 top-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 w-48 bg-slate-900/95 backdrop-blur-md border border-secondary/50 p-3 rounded shadow-2xl">
+<div class="text-secondary font-headline font-bold text-sm mb-1 uppercase tracking-wider">Oakheart Village</div>
+<div class="grid grid-cols-2 gap-2 text-[10px]">
+<span class="text-slate-500">Environment</span><span class="text-slate-200">Woodland Hub</span>
+<span class="text-slate-500">Danger</span><span class="text-emerald-400">Minimal</span>
+<span class="text-slate-500">Entities</span><span class="text-slate-200">Townsfolk, Guard</span>
+</div>
+</div>
+</div>
+<!-- Marker 2: Ruins -->
+<div class="absolute top-[25%] left-[65%] group">
+<div class="relative flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container-highest border-2 border-primary rounded-full flex items-center justify-center text-primary shadow-[0_0_15px_rgba(139,92,246,0.5)] cursor-pointer z-10 transition-transform hover:scale-110">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+</div>
+<div class="absolute left-10 top-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 w-48 bg-slate-900/95 backdrop-blur-md border border-primary/50 p-3 rounded shadow-2xl">
+<div class="text-primary font-headline font-bold text-sm mb-1 uppercase tracking-wider">Eldritch Spire</div>
+<div class="grid grid-cols-2 gap-2 text-[10px]">
+<span class="text-slate-500">Environment</span><span class="text-slate-200">Arcane Ruin</span>
+<span class="text-slate-500">Danger</span><span class="text-secondary">Elevated</span>
+<span class="text-slate-500">Entities</span><span class="text-slate-200">Arcane Wraiths</span>
+</div>
+</div>
+</div>
+<!-- Marker 3: Cave -->
+<div class="absolute top-[70%] left-[45%] group">
+<div class="relative flex items-center justify-center">
+<div class="w-8 h-8 bg-surface-container-highest border-2 border-tertiary rounded-full flex items-center justify-center text-tertiary shadow-[0_0_15px_rgba(239,68,68,0.5)] cursor-pointer z-10 transition-transform hover:scale-110">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">landscape</span>
+</div>
+</div>
+<div class="absolute left-10 top-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 w-48 bg-slate-900/95 backdrop-blur-md border border-tertiary/50 p-3 rounded shadow-2xl">
+<div class="text-tertiary font-headline font-bold text-sm mb-1 uppercase tracking-wider">The Void Maw</div>
+<div class="grid grid-cols-2 gap-2 text-[10px]">
+<span class="text-slate-500">Environment</span><span class="text-slate-200">Underdark Vent</span>
+<span class="text-slate-500">Danger</span><span class="text-tertiary font-bold">CRITICAL</span>
+<span class="text-slate-500">Entities</span><span class="text-slate-200">Gorgon Nest</span>
+</div>
+</div>
+</div>
+<!-- Marker 4: Boss Lair -->
+<div class="absolute top-[60%] left-[80%] group">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-16 h-16 border-2 border-tertiary/20 rounded-full animate-pulse"></div>
+<div class="w-10 h-10 bg-surface-container-highest border-2 border-tertiary rounded flex items-center justify-center text-tertiary shadow-[0_0_25px_rgba(239,68,68,0.6)] cursor-pointer z-10 transition-transform hover:scale-125 rotate-45">
+<span class="material-symbols-outlined text-lg -rotate-45" style="font-variation-settings: 'FILL' 1;">skull</span>
+</div>
+</div>
+<div class="absolute right-12 top-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 w-56 bg-slate-950/98 backdrop-blur-xl border border-tertiary p-4 rounded shadow-[0_0_40px_rgba(0,0,0,0.8)]">
+<div class="text-tertiary font-headline font-black text-base mb-2 uppercase tracking-tighter">Dragon's Reach</div>
+<div class="space-y-3">
+<div class="grid grid-cols-2 gap-2 text-xs">
+<span class="text-slate-500">Region</span><span class="text-slate-200">Volcanic Peak</span>
+<span class="text-slate-500">Lethality</span><span class="text-tertiary font-bold">EXTREME</span>
+</div>
+<div class="pt-2 border-t border-slate-800">
+<span class="text-[10px] text-slate-500 block mb-1">KNOWN ENTITY</span>
+<span class="text-sm font-bold text-secondary">Ignis the Scourge</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interface Overlays -->
+<!-- Region Header -->
+<div class="absolute top-6 left-6 z-10">
+<div class="bg-slate-950/90 backdrop-blur-md border-l-4 border-primary p-4 shadow-2xl">
+<h1 class="font-headline text-2xl font-black text-primary tracking-tight leading-none">THE WHISPERING WOODS</h1>
+<p class="text-[10px] text-slate-400 mt-1 uppercase tracking-widest font-medium">Sector 04 - High Danger Zone</p>
+</div>
+</div>
+<!-- Travel Tracker Panel -->
+<div class="absolute bottom-6 left-6 z-10 w-80">
+<div class="bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded p-4 shadow-2xl">
+<div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
+<span class="font-headline font-bold text-xs text-secondary flex items-center gap-2 uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">directions_walk</span>
+                        Travel Tracker
+                    </span>
+<span class="text-[10px] text-slate-500">ACTIVE SESSION</span>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<div class="text-[10px] text-slate-500 uppercase font-bold">Current Distance</div>
+<div class="text-xl font-headline font-bold text-on-surface">14.2 km</div>
+</div>
+<div class="text-right">
+<div class="text-[10px] text-slate-500 uppercase font-bold">Est. Time</div>
+<div class="text-xl font-headline font-bold text-primary">6h 15m</div>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded border border-outline-variant/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-2xl">thunderstorm</span>
+<div>
+<div class="text-xs font-bold text-slate-200">Heavy Mist &amp; Thunder</div>
+<div class="text-[10px] text-slate-400">-2 Perception | Difficult Terrain</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 bg-slate-900 border border-slate-700 text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:bg-slate-800 transition-colors">Log Rest</button>
+<button class="py-2 bg-violet-600 border border-violet-500 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-violet-500 transition-colors">Start Enc</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Legend -->
+<div class="absolute bottom-6 right-6 z-10 w-56">
+<div class="bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded p-4 shadow-2xl">
+<div class="text-[10px] text-slate-500 font-bold mb-3 uppercase tracking-widest border-b border-slate-800 pb-2">Map Legend</div>
+<div class="space-y-2">
+<div class="flex items-center gap-3 text-xs text-slate-300">
+<div class="w-4 h-4 border border-secondary rounded-full flex items-center justify-center text-[10px] text-secondary">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<span>Settlement</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-slate-300">
+<div class="w-4 h-4 border border-primary rounded-full flex items-center justify-center text-[10px] text-primary">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<span>Ancient Ruin</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-slate-300">
+<div class="w-4 h-4 border border-tertiary rounded-full flex items-center justify-center text-[10px] text-tertiary">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">landscape</span>
+</div>
+<span>Natural Hazard</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-slate-300">
+<div class="w-4 h-4 bg-tertiary/20 border border-tertiary rounded rotate-45 flex items-center justify-center text-[10px] text-tertiary">
+<span class="material-symbols-outlined text-[10px] -rotate-45" style="font-variation-settings: 'FILL' 1;">skull</span>
+</div>
+<span>Boss Lair</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Compass & Zoom Controls -->
+<div class="absolute top-6 right-6 z-10 flex flex-col gap-2">
+<div class="bg-slate-950/90 border border-slate-800 p-2 flex flex-col gap-2 shadow-xl">
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<div class="h-[1px] bg-slate-800 mx-1"></div>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<div class="bg-slate-950/90 border border-slate-800 w-12 h-12 flex items-center justify-center text-primary shadow-xl">
+<span class="material-symbols-outlined text-2xl">explore</span>
+</div>
+</div>
+<!-- Bottom Data Strip (Bloomberg Terminal Style) -->
+<div class="absolute bottom-0 w-full z-20 bg-slate-950/95 border-t border-slate-800 py-1 px-4 flex items-center justify-between text-[10px] font-mono tracking-tighter">
+<div class="flex gap-4">
+<span class="text-slate-500">SYSTEM: <span class="text-emerald-500">OPERATIONAL</span></span>
+<span class="text-slate-500">LAT: <span class="text-slate-300">45.23.01.N</span></span>
+<span class="text-slate-500">LONG: <span class="text-slate-300">12.11.88.W</span></span>
+</div>
+<div class="flex gap-4">
+<span class="text-primary font-bold">PARTY POSITION: 30.0 / 40.0</span>
+<span class="text-slate-500">ENTITY COUNT: <span class="text-secondary">42 DETECTED</span></span>
+</div>
+<div class="flex gap-4 items-center">
+<div class="flex gap-1">
+<div class="w-1 h-3 bg-primary"></div>
+<div class="w-1 h-3 bg-primary/60"></div>
+<div class="w-1 h-3 bg-primary/30"></div>
+<div class="w-1 h-3 bg-slate-800"></div>
+</div>
+<span class="text-slate-400">SIGNAL STRENGTH: OPTIMAL</span>
+</div>
+</div>
+</main>
+</body></html>

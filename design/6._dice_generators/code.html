@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dice Roller &amp; Quick Generators</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&amp;family=Inter:wght@400..700&amp;family=JetBrains+Mono:wght@400..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0; }
+        .glass-panel {
+            background: rgba(45, 52, 73, 0.4); /* surface-variant base */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-container": "#a078ff",
+              "on-error": "#690005",
+              "on-background": "#dae2fd",
+              "surface-container": "#171f33",
+              "surface-dim": "#0b1326",
+              "secondary-container": "#ee9800",
+              "on-secondary": "#472a00",
+              "surface-container-high": "#222a3d",
+              "surface-container-lowest": "#060e20",
+              "secondary": "#ffb95f",
+              "on-primary-fixed": "#23005c",
+              "surface-bright": "#31394d",
+              "on-error-container": "#ffdad6",
+              "inverse-primary": "#6d3bd7",
+              "inverse-on-surface": "#283044",
+              "surface-container-highest": "#2d3449",
+              "on-surface-variant": "#cbc3d7",
+              "on-tertiary-container": "#5c0008",
+              "outline-variant": "#494454",
+              "on-primary-container": "#340080",
+              "on-tertiary-fixed-variant": "#930013",
+              "on-primary": "#3c0091",
+              "outline": "#958ea0",
+              "primary-fixed-dim": "#d0bcff",
+              "secondary-fixed-dim": "#ffb95f",
+              "tertiary-container": "#ff5451",
+              "on-primary-fixed-variant": "#5516be",
+              "primary": "#d0bcff",
+              "on-tertiary": "#68000a",
+              "primary-fixed": "#e9ddff",
+              "error": "#ffb4ab",
+              "on-secondary-fixed": "#2a1700",
+              "surface-variant": "#2d3449",
+              "tertiary-fixed-dim": "#ffb3ad",
+              "surface-container-low": "#131b2e",
+              "surface-tint": "#d0bcff",
+              "on-secondary-fixed-variant": "#653e00",
+              "secondary-fixed": "#ffddb8",
+              "tertiary": "#ffb3ad",
+              "surface": "#0b1326",
+              "on-secondary-container": "#5b3800",
+              "on-surface": "#dae2fd",
+              "inverse-surface": "#dae2fd",
+              "on-tertiary-fixed": "#410004",
+              "tertiary-fixed": "#ffdad7",
+              "background": "#0b1326",
+              "error-container": "#93000a"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body h-screen flex overflow-hidden">
+<!-- TopNavBar Included as requested -->
+<div class="relative flex h-full w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center">
+<div class="layout-content-container flex flex-col w-full flex-1">
+<header class="flex items-center justify-between whitespace-nowrap bg-surface-container-high px-6 py-3 border-b border-outline-variant/30 sticky top-0 z-10">
+<div class="flex items-center gap-4 text-on-surface">
+<div class="size-6 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</div>
+<h2 class="text-on-surface text-lg font-headline font-bold leading-tight tracking-[-0.015em]">Terminal</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<div class="text-on-surface-variant flex items-center gap-2 cursor-pointer hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="search">search</span>
+<span class="text-sm font-label hidden sm:block">Command [Ctrl+K]</span>
+</div>
+<div class="bg-surface-container-lowest bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 ring-1 ring-outline-variant/50" data-alt="Dark avatar placeholder with DM initials" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCycvL78t69gbLoG6p2j53VX0Cb9HPclrrcf9-lCJIwb9r4d_i3_eUaNbNRoIiMeMnlTtydkCg-u2GV2GL9bwKN-XFR1a07igjrxiB1Lvg6hK47D66nGsMuTV33hcH7CwPBYJjKKjvgFyvsBKi_izbIsbOAVoh-hQCZElgiUr0RPFmg_bvze5wGqZZHZJvm-JewYpbbpEZE_PGpti5wUEB_9icWNbBkgFASCl9lrXppyIzc2Lwb-9XM4mKBI2vwPXy_nYY3EktGWl1h");'></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<div class="hidden md:flex w-64 flex-col justify-between bg-surface-container-low border-r border-outline-variant/20 p-4 shrink-0 overflow-y-auto">
+<div class="flex flex-col gap-6">
+<div class="flex gap-3 items-center">
+<div class="bg-surface-container-highest bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/30" data-alt="Campaign icon placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkpFuLTlqjmYB5eW_4I_eHIubKIUMWlSgUl9pS1D5dlUpUz9jK79EFOLID9NW5GdQ5QhFic9jBi8ztu1OwJ74KsvLWfmrf-kMJ_-LsSBPb7TyKhvJKXnZcnXBkRzToErXR6HjMHjrhzcmbxUu-C65JyQNpAtsjddJDT3fl1EYHw_8YR8Zrrh2s4EWJAByTkHX8DtezowuuTt46EdvHkDAezNt4yoqKSkM4ASIc-wFpARAe1XD7EDkAHmS2SidQ1mMUUbJ4-b9uBegC");'></div>
+<div class="flex flex-col">
+<h1 class="text-on-surface text-base font-headline font-medium leading-normal">DM Tools</h1>
+<p class="text-on-surface-variant text-xs font-label leading-normal">Active Campaign</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="book" data-size="24px" data-weight="regular">book</span>
+<span class="text-sm font-label font-medium leading-normal">Campaign</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="swords" data-size="24px" data-weight="regular">swords</span>
+<span class="text-sm font-label font-medium leading-normal">Encounters</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="skull" data-size="24px" data-weight="regular">skull</span>
+<span class="text-sm font-label font-medium leading-normal">Monsters</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-surface-container-high text-primary border-l-2 border-primary" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="casino" data-size="24px" data-weight="fill" style="font-variation-settings: 'FILL' 1;">casino</span>
+<span class="text-sm font-label font-medium leading-normal">Dice &amp; Gen</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings" data-size="24px" data-weight="regular">settings</span>
+<span class="text-sm font-label font-medium leading-normal">Settings</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col lg:flex-row overflow-hidden bg-background">
+<!-- Left Column: Dice Roller & History -->
+<div class="flex-1 flex flex-col p-6 overflow-y-auto gap-6 border-r border-outline-variant/10">
+<section>
+<h2 class="text-on-surface text-xl font-headline font-bold leading-tight tracking-[-0.015em] mb-4">Command: Roll</h2>
+<!-- Dice Input -->
+<div class="bg-surface-container-low rounded p-4 border border-outline-variant/20 shadow-sm flex flex-col gap-4">
+<!-- Quick Dice Buttons -->
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/30 rounded text-on-surface hover:bg-surface-container-high hover:border-secondary transition-colors flex items-center gap-1 font-mono text-sm">
+<span class="text-secondary opacity-70">d4</span>
+</button>
+<button class="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/30 rounded text-on-surface hover:bg-surface-container-high hover:border-secondary transition-colors flex items-center gap-1 font-mono text-sm">
+<span class="text-secondary opacity-70">d6</span>
+</button>
+<button class="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/30 rounded text-on-surface hover:bg-surface-container-high hover:border-secondary transition-colors flex items-center gap-1 font-mono text-sm">
+<span class="text-secondary opacity-70">d8</span>
+</button>
+<button class="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/30 rounded text-on-surface hover:bg-surface-container-high hover:border-secondary transition-colors flex items-center gap-1 font-mono text-sm">
+<span class="text-secondary opacity-70">d10</span>
+</button>
+<button class="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/30 rounded text-on-surface hover:bg-surface-container-high hover:border-secondary transition-colors flex items-center gap-1 font-mono text-sm">
+<span class="text-secondary opacity-70">d12</span>
+</button>
+<button class="px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/50 rounded text-primary hover:bg-surface-container-high hover:border-primary transition-colors flex items-center gap-1 font-mono text-sm shadow-[0_0_10px_rgba(208,188,255,0.1)]">
+<span class="font-bold">d20</span>
+</button>
+</div>
+<div class="flex flex-col sm:flex-row items-stretch gap-3">
+<div class="relative flex-1">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="chevron_right">chevron_right</span>
+</div>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface font-mono text-lg rounded pl-10 pr-4 py-3 focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-all placeholder:text-outline-variant placeholder:font-body" placeholder="e.g., 2d20+5, 4d6+2" type="text" value="2d20+5"/>
+</div>
+<button class="bg-gradient-to-b from-secondary to-secondary-container text-on-secondary font-headline font-bold text-lg px-8 py-3 rounded shadow-[0_0_15px_rgba(238,152,0,0.3)] hover:shadow-[0_0_20px_rgba(238,152,0,0.5)] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="casino">casino</span>
+                                                Roll
+                                            </button>
+</div>
+</div>
+</section>
+<!-- Roll History -->
+<section class="flex-1 flex flex-col min-h-0">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-on-surface-variant text-sm font-headline font-medium uppercase tracking-wider">Output Log</h3>
+<button class="text-outline hover:text-on-surface transition-colors flex items-center gap-1 text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span> Clear
+                                        </button>
+</div>
+<div class="flex-1 overflow-y-auto bg-surface-container-lowest border border-outline-variant/20 rounded p-4 flex flex-col gap-3">
+<!-- History Item 1 -->
+<div class="group flex flex-col p-3 rounded bg-surface-container hover:bg-surface-container-high transition-colors relative border border-transparent hover:border-outline-variant/20">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<span class="text-outline-variant font-mono text-xs">10:42</span>
+<span class="text-on-surface font-mono text-sm bg-surface-container-lowest px-2 py-0.5 rounded border border-outline-variant/10">2d20+5</span>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-outline hover:text-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+<div class="flex items-end justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant font-mono text-sm">
+<span>[</span>
+<span class="text-on-surface">12</span>
+<span>,</span>
+<span class="text-on-surface">8</span>
+<span>]</span>
+<span class="text-outline">+ 5</span>
+<span class="text-outline">=</span>
+</div>
+<div class="text-secondary font-mono text-2xl font-bold">25</div>
+</div>
+</div>
+<!-- History Item 2 (Critical Hit Example) -->
+<div class="group flex flex-col p-3 rounded bg-surface-container hover:bg-surface-container-high transition-colors relative border border-primary/20 bg-primary/5">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<span class="text-outline-variant font-mono text-xs">10:38</span>
+<span class="text-on-surface font-mono text-sm bg-surface-container-lowest px-2 py-0.5 rounded border border-outline-variant/10">1d20</span>
+<span class="text-primary text-xs font-headline font-bold uppercase tracking-wider bg-primary/10 px-1.5 rounded">Crit</span>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-outline hover:text-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+<div class="flex items-end justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant font-mono text-sm">
+<span>[</span>
+<span class="text-primary font-bold">20</span>
+<span>]</span>
+<span class="text-outline">=</span>
+</div>
+<div class="text-primary font-mono text-2xl font-bold shadow-primary/20 drop-shadow-[0_0_8px_rgba(208,188,255,0.5)]">20</div>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="group flex flex-col p-3 rounded bg-surface-container hover:bg-surface-container-high transition-colors relative border border-transparent hover:border-outline-variant/20">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<span class="text-outline-variant font-mono text-xs">10:35</span>
+<span class="text-on-surface font-mono text-sm bg-surface-container-lowest px-2 py-0.5 rounded border border-outline-variant/10">4d6+2</span>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-outline hover:text-primary transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+<div class="flex items-end justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant font-mono text-sm">
+<span>[</span>
+<span class="text-on-surface">3</span>,
+                                                    <span class="text-on-surface">6</span>,
+                                                    <span class="text-on-surface">1</span>,
+                                                    <span class="text-on-surface">4</span>
+<span>]</span>
+<span class="text-outline">+ 2</span>
+<span class="text-outline">=</span>
+</div>
+<div class="text-on-surface font-mono text-xl font-bold">16</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Quick Generators -->
+<div class="w-full lg:w-80 bg-surface-container-low p-6 flex flex-col gap-6 overflow-y-auto">
+<h2 class="text-on-surface text-lg font-headline font-bold leading-tight tracking-[-0.015em] flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="bolt">bolt</span>
+                                    Quick Gen
+                                </h2>
+<!-- Weather Gen -->
+<div class="bg-surface-container rounded border border-outline-variant/20 overflow-hidden flex flex-col">
+<div class="bg-surface-container-highest px-3 py-2 flex justify-between items-center border-b border-outline-variant/10">
+<span class="text-on-surface-variant text-xs font-headline uppercase tracking-wider font-semibold">Weather</span>
+<div class="flex gap-1">
+<button class="text-outline hover:text-primary transition-colors p-1" title="Regenerate">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+</button>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Copy">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="p-4 flex items-center gap-3">
+<div class="size-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary border border-secondary/20">
+<span class="material-symbols-outlined" data-icon="sunny">sunny</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Sunny, Clear Skies</span>
+<span class="text-outline-variant font-mono text-sm">72°F / Light Breeze</span>
+</div>
+</div>
+</div>
+<!-- Tavern Gen -->
+<div class="bg-surface-container rounded border border-outline-variant/20 overflow-hidden flex flex-col">
+<div class="bg-surface-container-highest px-3 py-2 flex justify-between items-center border-b border-outline-variant/10">
+<span class="text-on-surface-variant text-xs font-headline uppercase tracking-wider font-semibold">Tavern</span>
+<div class="flex gap-1">
+<button class="text-outline hover:text-primary transition-colors p-1" title="Regenerate">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+</button>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Copy">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-1">
+<span class="text-primary font-headline font-bold text-lg">The Rusty Flagon</span>
+<span class="text-on-surface-variant text-sm">A bustling, low-ceilinged dive smelling of stale ale and woodsmoke.</span>
+</div>
+</div>
+<!-- Loot Gen -->
+<div class="bg-surface-container rounded border border-outline-variant/20 overflow-hidden flex flex-col">
+<div class="bg-surface-container-highest px-3 py-2 flex justify-between items-center border-b border-outline-variant/10">
+<span class="text-on-surface-variant text-xs font-headline uppercase tracking-wider font-semibold">Loot (Minor)</span>
+<div class="flex gap-1">
+<button class="text-outline hover:text-primary transition-colors p-1" title="Regenerate">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+</button>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Copy">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="p-3 flex flex-col gap-2">
+<div class="flex justify-between items-center bg-surface-container-lowest px-2 py-1 rounded border border-outline-variant/10">
+<span class="text-on-surface text-sm">Gold Pieces</span>
+<span class="text-secondary font-mono">15gp</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-lowest px-2 py-1 rounded border border-outline-variant/10">
+<span class="text-primary text-sm">Potion of Healing</span>
+<span class="text-outline font-mono text-xs">x1</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-lowest px-2 py-1 rounded border border-outline-variant/10">
+<span class="text-on-surface-variant text-sm">Tarnished Silver Ring</span>
+<span class="text-outline font-mono text-xs">Val: 2gp</span>
+</div>
+</div>
+</div>
+<!-- NPC Gen -->
+<div class="bg-surface-container rounded border border-outline-variant/20 overflow-hidden flex flex-col">
+<div class="bg-surface-container-highest px-3 py-2 flex justify-between items-center border-b border-outline-variant/10">
+<span class="text-on-surface-variant text-xs font-headline uppercase tracking-wider font-semibold">Quick NPC</span>
+<div class="flex gap-1">
+<button class="text-outline hover:text-primary transition-colors p-1" title="Regenerate">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+</button>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Copy">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="text-on-surface font-headline font-bold">Bryn the Stout</span>
+<span class="bg-surface-container-lowest text-outline-variant text-xs px-1.5 py-0.5 rounded border border-outline-variant/20">Dwarf</span>
+</div>
+<span class="text-on-surface-variant text-sm">Suspicious, gruff, missing half of his left eyebrow.</span>
+<div class="mt-2 flex gap-2">
+<span class="text-xs text-outline bg-surface-container-lowest px-2 py-1 rounded">Alignment: N</span>
+<span class="text-xs text-outline bg-surface-container-lowest px-2 py-1 rounded">Voice: Gravelly</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

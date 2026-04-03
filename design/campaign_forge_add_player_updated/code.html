@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Arcanist’s Terminal - Party Initialization</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-tertiary-fixed": "#410004",
+          "primary-fixed-dim": "#d0bcff",
+          "tertiary-fixed": "#ffdad7",
+          "tertiary-fixed-dim": "#ffb3ad",
+          "on-surface-variant": "#cbc3d7",
+          "surface-container-low": "#131b2e",
+          "surface-bright": "#31394d",
+          "on-tertiary": "#68000a",
+          "on-secondary": "#472a00",
+          "on-primary-fixed": "#23005c",
+          "background": "#0b1326",
+          "secondary-fixed": "#ffddb8",
+          "error": "#ffb4ab",
+          "on-tertiary-container": "#5c0008",
+          "surface-container-highest": "#2d3449",
+          "primary-container": "#a078ff",
+          "primary-fixed": "#e9ddff",
+          "error-container": "#93000a",
+          "on-surface": "#dae2fd",
+          "surface-container-high": "#222a3d",
+          "inverse-on-surface": "#283044",
+          "surface-tint": "#d0bcff",
+          "on-secondary-container": "#5b3800",
+          "on-background": "#dae2fd",
+          "surface-container-lowest": "#060e20",
+          "inverse-primary": "#6d3bd7",
+          "surface-variant": "#2d3449",
+          "on-primary": "#3c0091",
+          "surface-dim": "#0b1326",
+          "outline-variant": "#494454",
+          "surface-container": "#171f33",
+          "secondary-container": "#ee9800",
+          "primary": "#d0bcff",
+          "on-secondary-fixed-variant": "#653e00",
+          "inverse-surface": "#dae2fd",
+          "on-primary-container": "#340080",
+          "surface": "#0b1326",
+          "tertiary-container": "#ff5451",
+          "tertiary": "#ffb3ad",
+          "on-secondary-fixed": "#2a1700",
+          "outline": "#958ea0",
+          "secondary": "#ffb95f",
+          "on-error": "#690005",
+          "on-error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#5516be",
+          "on-tertiary-fixed-variant": "#930013",
+          "secondary-fixed-dim": "#ffb95f"
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk", "sans-serif"],
+          "body": ["Inter", "sans-serif"],
+          "label": ["Inter", "sans-serif"],
+          "mono": ["JetBrains Mono", "monospace"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6, .headline {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .mono-stat {
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Back Header Exception for Focused View -->
+<header class="flex items-center justify-between px-6 py-4 bg-surface-container-low border-b border-surface-container-high/50 sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[24px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<span class="text-xs font-mono text-secondary tracking-widest uppercase">Campaign Setup</span>
+<h1 class="headline text-lg font-bold text-on-surface">Initialization Protocol</h1>
+</div>
+</div>
+<!-- System Status -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1.5 rounded border border-outline-variant/20">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_rgba(255,185,95,0.6)]"></div>
+<span class="text-xs font-mono text-on-surface-variant">SYS.ONLINE</span>
+</div>
+</div>
+</header>
+<main class="layout-container flex h-full grow flex-col pb-12">
+<div class="px-6 md:px-12 lg:px-40 flex flex-1 justify-center py-8">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-8">
+<!-- Header Section -->
+<div class="flex flex-col gap-2 p-4 bg-surface-container-low rounded border border-surface-container-high relative overflow-hidden">
+<div class="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-surface-container-high to-transparent opacity-50 pointer-events-none"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[28px]" data-icon="group">group</span>
+<p class="headline text-on-surface tracking-tight text-[32px] font-bold leading-tight">03. Party Initialization</p>
+</div>
+<p class="text-on-surface-variant text-sm font-body max-w-2xl mt-1">
+                Establish the operative unit. Minimum 1 entity required. Maximum capacity: 4 entities. Ensure balanced parameter distribution for optimal operational success in Sector 7.
+            </p>
+</div>
+<!-- Party Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+<!-- Character Card: Thorne -->
+<div class="group relative flex flex-col gap-3 rounded bg-surface-container border border-outline-variant/20 overflow-hidden hover:border-secondary/50 transition-colors shadow-[0_4px_24px_rgba(42,23,0,0.04)]">
+<div class="relative w-full aspect-[4/5] bg-surface-container-lowest">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Cyber-fantasy male rogue, dark cloak, glowing neon daggers, shadowy alley background, high tech tactical gear, moody blue and purple lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjHN2PUWywUdTsN5eG76n0Zxii3kwfaQArSivFg0uKLQE8thDi0hZi8Sp7w1T0_pGHlaFjZSUQRVis7F4KxNb-WgARFqyy2fcakNzZSZXmd27nlBrm6b2gkD1LeIA1XFXx33kYbYP-4cRXl__O6sUzfS2wTlFlZ5CqvwDzqcX_E8Vz1zWK0iNBsmH_asU3VzGa4ov7G3Mq0FCqpkokOq0DiprHl6kRekkmCJ8zJhRpo_5FHqzZcNzq_j5i-_L1YgBU1cbD3j7RTHZ-");'></div>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<!-- Status Overlay -->
+<div class="absolute top-3 right-3 flex gap-1">
+<div class="bg-surface-container-highest px-2 py-0.5 rounded flex items-center gap-1 border border-outline-variant/30 backdrop-blur-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_4px_rgba(208,188,255,0.8)]"></span>
+<span class="text-[10px] font-mono text-on-surface uppercase">RDY</span>
+</div>
+</div>
+<!-- Info Overlay -->
+<div class="absolute bottom-0 left-0 w-full p-4 flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h2 class="headline text-on-surface text-xl font-bold leading-tight">Thorne</h2>
+<span class="text-xs font-mono text-primary">LVL.01</span>
+</div>
+<p class="text-xs text-on-surface-variant font-mono uppercase tracking-wider">Shadow Operative</p>
+</div>
+</div>
+<!-- Stats -->
+<div class="flex flex-col p-3 gap-2 bg-surface-container">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">HP</span>
+<span class="text-on-surface">45/45</span>
+</div>
+<div class="h-1 w-full bg-surface-container-lowest rounded-sm overflow-hidden border border-outline-variant/10">
+<div class="h-full bg-tertiary w-full"></div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="text-xs font-mono text-secondary">DEX INT</span>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Character Card: Elara -->
+<div class="group relative flex flex-col gap-3 rounded bg-surface-container border border-outline-variant/20 overflow-hidden hover:border-secondary/50 transition-colors shadow-[0_4px_24px_rgba(42,23,0,0.04)]">
+<div class="relative w-full aspect-[4/5] bg-surface-container-lowest">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Cybernetic female mage, glowing data streams emanating from hands, sleek futuristic armor with arcane runes, cool blue and silver tones" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAyv5EmvqQuS-ZN6Z3odgq9SF-46a77QE93cKucrerqahBkoe1yI5ZXqNlMbcaIgHokYZvKG41vCeo_Y6bRR8aGPcc_JJTJVsgcv6DLBaiLwbS7_nNIdvvsJoVQSUFwV-Nc8c3PEDodje4sGIA2-9HJKg3lnATcaW9yd_12kCtXAByUrn2iZVho8OHf73Dl0aTR-90zLNzAi1PBnOSITKM5TLLRZaYd0l8OdlpzAzZy0vinsJHHFxAgO7MRT_05W1U3Yjmw7ryFUF_x");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<div class="absolute top-3 right-3 flex gap-1">
+<div class="bg-surface-container-highest px-2 py-0.5 rounded flex items-center gap-1 border border-outline-variant/30 backdrop-blur-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_4px_rgba(208,188,255,0.8)]"></span>
+<span class="text-[10px] font-mono text-on-surface uppercase">RDY</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4 flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h2 class="headline text-on-surface text-xl font-bold leading-tight">Elara</h2>
+<span class="text-xs font-mono text-primary">LVL.01</span>
+</div>
+<p class="text-xs text-on-surface-variant font-mono uppercase tracking-wider">Net-Weaver</p>
+</div>
+</div>
+<div class="flex flex-col p-3 gap-2 bg-surface-container">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">HP</span>
+<span class="text-on-surface">30/30</span>
+</div>
+<div class="h-1 w-full bg-surface-container-lowest rounded-sm overflow-hidden border border-outline-variant/10">
+<div class="h-full bg-tertiary w-full"></div>
+</div>
+<div class="flex items-center justify-between text-xs font-mono mt-1">
+<span class="text-on-surface-variant">MP</span>
+<span class="text-primary">50/50</span>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="text-xs font-mono text-secondary">INT WIS</span>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Character Card: Kael -->
+<div class="group relative flex flex-col gap-3 rounded bg-surface-container border border-outline-variant/20 overflow-hidden hover:border-secondary/50 transition-colors shadow-[0_4px_24px_rgba(42,23,0,0.04)]">
+<div class="relative w-full aspect-[4/5] bg-surface-container-lowest">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Heavy cyborg warrior, massive kinetic hammer, thick plated armor, warm amber and gold lighting, gritty industrial background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhXaluhECZPl0ATc8OTmh-2penrwzfMWzZDYCfIz3dO2C3gkyFR0bRxqlxTME0JUbKQXCMJsIvfarbGJfU6nSi0slUg0TeO5-P1Y6LnjBu7565mrFsylitEoq61gKZhCAcKKZUdri4eI9kBeRx9wvergOiCrpeoa5Oh_UUSZaPGPdKFGE9NL3-d_uNXyioF11_MVKjn2he8sH_StOaVNxC9hjZwgFX0FJh35JfkymZ-ANuBH37pKErtXak-QMd5qCQhkVcVlrA_0nA");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+<div class="absolute top-3 right-3 flex gap-1">
+<div class="bg-surface-container-highest px-2 py-0.5 rounded flex items-center gap-1 border border-outline-variant/30 backdrop-blur-md">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_4px_rgba(208,188,255,0.8)]"></span>
+<span class="text-[10px] font-mono text-on-surface uppercase">RDY</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4 flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h2 class="headline text-on-surface text-xl font-bold leading-tight">Kael</h2>
+<span class="text-xs font-mono text-primary">LVL.01</span>
+</div>
+<p class="text-xs text-on-surface-variant font-mono uppercase tracking-wider">Juggernaut</p>
+</div>
+</div>
+<div class="flex flex-col p-3 gap-2 bg-surface-container">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">HP</span>
+<span class="text-on-surface">65/65</span>
+</div>
+<div class="h-1 w-full bg-surface-container-lowest rounded-sm overflow-hidden border border-outline-variant/10">
+<div class="h-full bg-tertiary w-full"></div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="text-xs font-mono text-secondary">STR CON</span>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Add Player Slot -->
+<div class="group relative flex flex-col items-center justify-center gap-4 rounded bg-surface-container-lowest border border-dashed border-outline-variant/40 hover:border-secondary transition-colors aspect-[4/5] min-h-[300px] cursor-pointer">
+<!-- Circular Amber Plus Button -->
+<div class="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-b from-secondary to-[#c27c00] text-background shadow-[0_0_16px_rgba(255,185,95,0.3)] group-hover:shadow-[0_0_24px_rgba(255,185,95,0.6)] transition-all duration-300">
+<span class="material-symbols-outlined text-[32px] font-bold" data-icon="add">add</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<p class="headline text-on-surface text-lg font-bold">Add Entity</p>
+<p class="text-xs text-on-surface-variant font-mono">SLOT 04 [EMPTY]</p>
+</div>
+<div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded"></div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="flex justify-end border-t border-surface-container-high/50 pt-6 mt-4">
+<button class="flex items-center justify-center h-12 px-8 rounded bg-gradient-to-b from-secondary to-[#c27c00] text-background font-bold tracking-wide hover:brightness-110 transition-all shadow-[0_0_12px_rgba(255,185,95,0.2)]">
+<span class="text-sm font-body uppercase">Initialize Protocol</span>
+<span class="material-symbols-outlined ml-2 text-[20px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

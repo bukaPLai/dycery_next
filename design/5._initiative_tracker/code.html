@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Initiative Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-container-low": "#131b2e",
+          "on-tertiary-fixed-variant": "#930013",
+          "on-tertiary": "#68000a",
+          "inverse-on-surface": "#283044",
+          "secondary-fixed-dim": "#ffb95f",
+          "primary-container": "#a078ff",
+          "surface-tint": "#d0bcff",
+          "error-container": "#93000a",
+          "on-primary-container": "#340080",
+          "secondary-container": "#ee9800",
+          "inverse-surface": "#dae2fd",
+          "secondary-fixed": "#ffddb8",
+          "surface-bright": "#31394d",
+          "on-secondary-fixed-variant": "#653e00",
+          "surface-container-high": "#222a3d",
+          "on-secondary": "#472a00",
+          "primary-fixed-dim": "#d0bcff",
+          "on-primary": "#3c0091",
+          "surface": "#0b1326",
+          "on-tertiary-container": "#5c0008",
+          "outline-variant": "#494454",
+          "on-error": "#690005",
+          "tertiary": "#ffb3ad",
+          "tertiary-container": "#ff5451",
+          "on-background": "#dae2fd",
+          "surface-variant": "#2d3449",
+          "surface-container-highest": "#2d3449",
+          "on-surface": "#dae2fd",
+          "on-error-container": "#ffdad6",
+          "tertiary-fixed": "#ffdad7",
+          "tertiary-fixed-dim": "#ffb3ad",
+          "surface-container": "#171f33",
+          "on-secondary-fixed": "#2a1700",
+          "on-secondary-container": "#5b3800",
+          "secondary": "#ffb95f",
+          "primary": "#d0bcff",
+          "on-primary-fixed": "#23005c",
+          "primary-fixed": "#e9ddff",
+          "inverse-primary": "#6d3bd7",
+          "surface-dim": "#0b1326",
+          "on-surface-variant": "#cbc3d7",
+          "error": "#ffb4ab",
+          "outline": "#958ea0",
+          "surface-container-lowest": "#060e20",
+          "on-tertiary-fixed": "#410004",
+          "background": "#0b1326",
+          "on-primary-fixed-variant": "#5516be"
+},
+        fontFamily: {
+          "headline": ["Space Grotesk", "sans-serif"],
+          "body": ["Inter", "sans-serif"],
+          "label": ["Inter", "sans-serif"],
+          "mono": ["JetBrains Mono", "monospace"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  body {
+    background-color: theme('colors.background');
+    color: theme('colors.on-surface');
+  }
+  .glass-panel {
+    background-color: rgba(45, 52, 73, 0.5); /* surface-variant */
+    backdrop-filter: blur(12px);
+  }
+  .input-recessed {
+    background-color: theme('colors.surface-container-lowest');
+    border: 1px solid rgba(73, 68, 84, 0.2); /* outline-variant */
+  }
+  .input-recessed:focus {
+    border-color: theme('colors.secondary');
+    outline: none;
+    box-shadow: 0 0 0 1px theme('colors.secondary');
+  }
+</style>
+</head>
+<body class="font-body antialiased min-h-screen flex flex-col">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap px-10 py-3 bg-surface-container-high rounded mb-6">
+<div class="flex items-center gap-4 text-on-surface">
+<button aria-label="Go Back" class="flex items-center justify-center p-2 rounded hover:bg-surface-variant text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-on-surface font-headline text-lg font-bold leading-tight tracking-tight">Initiative Tracker</h2>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 border border-outline-variant/20 text-on-surface text-sm font-label font-bold leading-normal hover:bg-surface-variant">
+<span class="material-symbols-outlined mr-2 text-primary" style="font-variation-settings: 'FILL' 0;">person_add</span>
+<span class="truncate">Add Player</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 border border-outline-variant/20 text-on-surface text-sm font-label font-bold leading-normal hover:bg-surface-variant">
+<span class="material-symbols-outlined mr-2 text-error" style="font-variation-settings: 'FILL' 0;">pest_control</span>
+<span class="truncate">Add Monster</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded h-10 px-4 bg-gradient-to-r from-secondary to-secondary-container text-on-secondary text-sm font-label font-bold leading-normal shadow-[0_0_15px_rgba(255,185,95,0.3)]">
+<span class="material-symbols-outlined mr-2" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="truncate">Options</span>
+</button>
+</div>
+</header>
+<div class="flex flex-col items-center mb-8">
+<h1 class="text-secondary font-headline tracking-widest text-[32px] font-bold leading-tight px-4 text-center pb-2 pt-6">ROUND 14</h1>
+<div class="flex justify-center w-full">
+<div class="flex gap-3 flex-wrap px-4 py-3 max-w-[480px] justify-center w-full">
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded h-12 px-6 bg-gradient-to-r from-primary to-primary-container text-on-primary-container text-base font-label font-bold leading-normal grow shadow-[0_0_15px_rgba(208,188,255,0.2)]">
+<span class="material-symbols-outlined mr-2" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+<span class="truncate">Next Turn</span>
+</button>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded h-12 px-6 border border-outline-variant/20 bg-surface-container-low text-on-surface-variant text-base font-label font-bold leading-normal hover:bg-surface-container">
+<span class="material-symbols-outlined mr-2" style="font-variation-settings: 'FILL' 0;">sports_martial_arts</span>
+<span class="truncate">End Combat</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-end px-4 pb-3">
+<h2 class="text-on-surface font-headline text-[22px] font-bold leading-tight tracking-tight">Combatants</h2>
+<span class="text-on-surface-variant text-sm font-mono">Count: 5</span>
+</div>
+<div class="flex flex-col gap-3 px-4">
+<!-- Active Turn -->
+<div class="flex items-center gap-4 bg-surface-container-high px-4 py-3 rounded border border-secondary shadow-[0_0_20px_rgba(255,185,95,0.15)] relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary rounded-l"></div>
+<div class="cursor-grab text-outline hover:text-on-surface">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="shrink-0 w-12 text-center">
+<p class="text-secondary font-mono text-xl font-bold leading-normal">22</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-[50px] w-[50px] border-2 border-secondary" data-alt="close up of a stoic paladin with silver armor and glowing golden eyes" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJQwkx8NU0cUOsy_i-HzArDzms1jCLzY0VzrSj5Sh_HYJJvQ2UzF19crBZJVGFOuDhmHCSxQ3Vne0eyN60lzJPzSyp1ZypF9SQsMZHXyjWu2TBgcb8t-psFwb8_yD3AS-KhuD1-Of6ewwSC5R3huENgkrHg0mUJH-gOlgSJ_Kimm1wIlwW521uzI0Z8mR53Nw8ld-vHb6rEMm77JpcrPELFx11_UUeVPpe3pFWxCCgO2mXVR-iPuwkdYclaScVdtqEIrIcWyKLPbLf");'></div>
+<div class="flex flex-1 flex-col justify-center">
+<div class="flex items-baseline gap-2">
+<p class="text-on-surface font-headline text-lg font-bold leading-normal">Valerius</p>
+<p class="text-outline text-sm font-normal leading-normal">Paladin</p>
+</div>
+<p class="text-secondary text-sm font-label font-medium leading-normal animate-pulse">Current Turn</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-outline text-xs font-mono">HP</span>
+<input class="input-recessed w-12 text-center text-on-surface font-mono text-sm rounded py-1 px-1" type="text" value="45"/>
+<span class="text-outline text-xs font-mono">/45</span>
+</div>
+<div class="w-full h-1 bg-surface-container-lowest">
+<div class="h-full bg-tertiary" style="width: 100%;"></div>
+</div>
+</div>
+<div class="flex flex-col items-end w-16">
+<span class="text-outline text-xs font-mono mb-1">AC</span>
+<input class="input-recessed w-12 text-center text-on-surface font-mono text-sm rounded py-1 px-1" type="text" value="18"/>
+</div>
+<button class="text-outline hover:text-error p-1 rounded hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+<!-- Regular Turn -->
+<div class="flex items-center gap-4 bg-surface-container-low px-4 py-3 rounded hover:bg-surface-container transition-colors group">
+<div class="cursor-grab text-outline hover:text-on-surface opacity-50 group-hover:opacity-100">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="shrink-0 w-12 text-center">
+<p class="text-on-surface font-mono text-xl font-bold leading-normal">18</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-[50px] w-[50px] border border-outline-variant" data-alt="dark shadowy rogue figure in hood with glowing purple daggers" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAE4KeLuluYQ75tbeU1uaiyhpGKrDwwePi3pCidhiLH3F8kQgtFNCRwjDC7d9mp5ZTEJds0lLzzPVxQYMIHtgLHNc3_VPRHfeDQRfGauGBZ-V75iRtVWuq5OSsIV74YdFzNaXDVNE1LLZWUyK0kDxkKrTCCuocxbsNGVx5_yt5SG8P48LW_c4F0SM-TmGK-TAF3c-mFqEUJdb0jD2CgPZsEwdbkIJC-ah5_eabWa1ybbs6NQqDpHIu6-uuq4UaDizgjY35ptMEgFTuT");'></div>
+<div class="flex flex-1 flex-col justify-center">
+<div class="flex items-baseline gap-2">
+<p class="text-on-surface font-headline text-lg font-bold leading-normal">Lyra</p>
+<p class="text-outline text-sm font-normal leading-normal">Rogue</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-outline text-xs font-mono">HP</span>
+<input class="input-recessed w-12 text-center text-on-surface font-mono text-sm rounded py-1 px-1" type="text" value="28"/>
+<span class="text-outline text-xs font-mono">/32</span>
+</div>
+<div class="w-full h-1 bg-surface-container-lowest">
+<div class="h-full bg-tertiary" style="width: 87.5%;"></div>
+</div>
+</div>
+<div class="flex flex-col items-end w-16">
+<span class="text-outline text-xs font-mono mb-1">AC</span>
+<input class="input-recessed w-12 text-center text-on-surface font-mono text-sm rounded py-1 px-1" type="text" value="15"/>
+</div>
+<button class="text-outline hover:text-error p-1 rounded hover:bg-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

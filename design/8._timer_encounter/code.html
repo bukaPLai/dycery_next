@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Turn Timer &amp; Encounter Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-primary": "#3c0091",
+          "on-background": "#dae2fd",
+          "primary": "#d0bcff",
+          "surface-container-lowest": "#060e20",
+          "surface-container-high": "#222a3d",
+          "on-error-container": "#ffdad6",
+          "on-error": "#690005",
+          "secondary-fixed": "#ffddb8",
+          "on-primary-fixed": "#23005c",
+          "on-secondary-container": "#5b3800",
+          "on-primary-fixed-variant": "#5516be",
+          "on-surface-variant": "#cbc3d7",
+          "on-tertiary-fixed-variant": "#930013",
+          "secondary-container": "#ee9800",
+          "surface-container-highest": "#2d3449",
+          "tertiary-fixed": "#ffdad7",
+          "surface-variant": "#2d3449",
+          "on-secondary-fixed-variant": "#653e00",
+          "tertiary-container": "#ff5451",
+          "on-tertiary": "#68000a",
+          "inverse-on-surface": "#283044",
+          "surface-tint": "#d0bcff",
+          "background": "#0b1326",
+          "surface-container": "#171f33",
+          "secondary": "#ffb95f",
+          "tertiary": "#ffb3ad",
+          "surface": "#0b1326",
+          "primary-fixed": "#e9ddff",
+          "on-tertiary-container": "#5c0008",
+          "inverse-surface": "#dae2fd",
+          "surface-bright": "#31394d",
+          "error-container": "#93000a",
+          "tertiary-fixed-dim": "#ffb3ad",
+          "outline": "#958ea0",
+          "error": "#ffb4ab",
+          "primary-container": "#a078ff",
+          "surface-dim": "#0b1326",
+          "outline-variant": "#494454",
+          "on-secondary-fixed": "#2a1700",
+          "on-surface": "#dae2fd",
+          "primary-fixed-dim": "#d0bcff",
+          "on-tertiary-fixed": "#410004",
+          "inverse-primary": "#6d3bd7",
+          "on-secondary": "#472a00",
+          "surface-container-low": "#131b2e",
+          "on-primary-container": "#340080",
+          "secondary-fixed-dim": "#ffb95f"
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk", "sans-serif"],
+          "body": ["Inter", "sans-serif"],
+          "label": ["Inter", "sans-serif"],
+          "mono": ["JetBrains Mono", "monospace"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  body {
+    background-color: theme('colors.background');
+    color: theme('colors.on-surface');
+  }
+  .glass-panel {
+    background: rgba(45, 52, 73, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(73, 68, 84, 0.2);
+  }
+  .btn-primary {
+    background: linear-gradient(180deg, theme('colors.secondary') 0%, theme('colors.secondary-container') 100%);
+    color: theme('colors.on-secondary-container');
+    box-shadow: 0 0 12px 0 rgba(238, 152, 0, 0.2);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 16px 0 rgba(238, 152, 0, 0.4);
+  }
+</style>
+</head>
+<body class="antialiased min-h-screen font-body flex flex-col">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-6">
+<!-- Header (Minimal for Focused View) -->
+<header class="flex items-center justify-between border-b border-surface-container-highest px-2 py-4">
+<div class="flex items-center gap-4">
+<button class="text-secondary hover:text-secondary-fixed transition-colors flex items-center justify-center size-10 rounded-lg hover:bg-surface-container-low">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline text-2xl font-bold text-on-surface">DM Shell <span class="text-outline font-normal text-lg ml-2">/ Combat Hub</span></h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-low px-3 py-1.5 rounded border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-tertiary">favorite</span>
+<span class="font-mono text-sm text-on-surface">Party HP: 84%</span>
+</div>
+<div class="bg-surface-container-low px-3 py-1.5 rounded border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">swords</span>
+<span class="font-mono text-sm text-on-surface">Round 4</span>
+</div>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Turn Timer Module -->
+<section class="lg:col-span-5 bg-surface-container rounded-lg border border-outline-variant/20 p-6 flex flex-col gap-6 shadow-lg shadow-black/20">
+<div class="flex items-center justify-between">
+<h2 class="font-headline text-xl font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">timer</span> Turn Timer
+            </h2>
+<div class="flex gap-2">
+<button class="p-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface-variant transition-colors" title="Pause">
+<span class="material-symbols-outlined text-sm">pause</span>
+</button>
+<button class="p-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface-variant transition-colors" title="Reset">
+<span class="material-symbols-outlined text-sm">restart_alt</span>
+</button>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex grow basis-0 flex-col items-stretch gap-2">
+<div class="flex h-20 grow items-center justify-center rounded-lg bg-surface-container-lowest border border-outline-variant/30">
+<p class="font-mono text-4xl font-bold text-outline">00</p>
+</div>
+<div class="flex items-center justify-center"><p class="text-outline text-xs font-medium uppercase tracking-wider">Minutes</p></div>
+</div>
+<div class="flex items-center justify-center pb-6">
+<p class="font-mono text-3xl font-bold text-outline-variant">:</p>
+</div>
+<div class="flex grow basis-0 flex-col items-stretch gap-2">
+<!-- Color shift simulation: Green -> Yellow -> Red based on time remaining -->
+<div class="flex h-20 grow items-center justify-center rounded-lg bg-surface-container-lowest border border-error/50 shadow-[0_0_15px_rgba(255,180,171,0.15)]">
+<p class="font-mono text-5xl font-bold text-error">12</p>
+</div>
+<div class="flex items-center justify-center"><p class="text-error text-xs font-medium uppercase tracking-wider">Seconds</p></div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<p class="text-sm text-on-surface-variant font-medium">Presets</p>
+<div class="flex h-10 w-full items-center justify-center rounded bg-surface-container-lowest p-1 border border-outline-variant/20">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded px-2 has-[:checked]:bg-surface-container-high has-[:checked]:text-on-surface text-on-surface-variant text-sm font-mono font-medium transition-colors">
+<span class="truncate">30s</span>
+<input class="invisible w-0" name="timer_preset" type="radio" value="30s"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded px-2 has-[:checked]:bg-surface-container-high has-[:checked]:text-on-surface text-on-surface-variant text-sm font-mono font-medium transition-colors">
+<span class="truncate">60s</span>
+<input checked="" class="invisible w-0" name="timer_preset" type="radio" value="60s"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded px-2 has-[:checked]:bg-surface-container-high has-[:checked]:text-on-surface text-on-surface-variant text-sm font-mono font-medium transition-colors">
+<span class="truncate">90s</span>
+<input class="invisible w-0" name="timer_preset" type="radio" value="90s"/>
+</label>
+</div>
+</div>
+</section>
+<!-- Encounter Generator Module -->
+<section class="lg:col-span-7 bg-surface-container rounded-lg border border-outline-variant/20 p-6 flex flex-col gap-6 shadow-lg shadow-black/20">
+<h2 class="font-headline text-xl font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">swords</span> Encounter Generator
+        </h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Environment</label>
+<select class="bg-surface-container-lowest border border-outline-variant/30 text-on-surface text-sm rounded focus:ring-1 focus:ring-primary focus:border-primary block w-full p-2.5 font-body">
+<option>Dungeon</option>
+<option>Urban</option>
+<option>Wilderness</option>
+<option>Underdark</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Difficulty</label>
+<select class="bg-surface-container-lowest border border-outline-variant/30 text-on-surface text-sm rounded focus:ring-1 focus:ring-primary focus:border-primary block w-full p-2.5 font-body">
+<option>Easy</option>
+<option>Medium</option>
+<option selected="">Hard</option>
+<option>Deadly</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Monster Type</label>
+<select class="bg-surface-container-lowest border border-outline-variant/30 text-on-surface text-sm rounded focus:ring-1 focus:ring-primary focus:border-primary block w-full p-2.5 font-body">
+<option>Any</option>
+<option selected="">Undead</option>
+<option>Beast</option>
+<option>Humanoid</option>
+<option>Aberration</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-medium text-on-surface-variant uppercase tracking-wider">Count</label>
+<div class="flex h-10 w-full items-center justify-center rounded bg-surface-container-lowest p-1 border border-outline-variant/20">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded px-2 has-[:checked]:bg-surface-container-high has-[:checked]:text-on-surface text-on-surface-variant text-sm font-mono font-medium transition-colors">
+<span class="truncate">1-3</span>
+<input class="invisible w-0" name="mob_count" type="radio" value="low"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded px-2 has-[:checked]:bg-surface-container-high has-[:checked]:text-on-surface text-on-surface-variant text-sm font-mono font-medium transition-colors">
+<span class="truncate">4-6</span>
+<input checked="" class="invisible w-0" name="mob_count" type="radio" value="med"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded px-2 has-[:checked]:bg-surface-container-high has-[:checked]:text-on-surface text-on-surface-variant text-sm font-mono font-medium transition-colors">
+<span class="truncate">Swarm</span>
+<input class="invisible w-0" name="mob_count" type="radio" value="high"/>
+</label>
+</div>
+</div>
+</div>
+<div class="pt-2 border-t border-outline-variant/20">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-headline text-sm font-bold text-on-surface">Generated Roster</h3>
+<span class="font-mono text-xs text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20">Total XP: 1,800</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Roster Item 1 -->
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded border border-outline-variant/20 hover:bg-surface-container-low transition-colors">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-background bg-surface-container-lowest" type="checkbox"/>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<p class="text-sm font-bold text-on-surface">Vampire Spawn</p>
+<p class="text-xs text-on-surface-variant font-mono">CR 5 • Undead</p>
+</div>
+<div class="flex gap-3">
+<span class="bg-tertiary-container/20 text-tertiary px-2 py-1 rounded text-xs font-mono border border-tertiary-container/30">HP: 82</span>
+<span class="bg-surface-bright text-on-surface-variant px-2 py-1 rounded text-xs font-mono border border-outline-variant/30">AC: 15</span>
+</div>
+</div>
+</div>
+<!-- Roster Item 2 -->
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded border border-outline-variant/20 hover:bg-surface-container-low transition-colors">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-background bg-surface-container-lowest" type="checkbox"/>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<p class="text-sm font-bold text-on-surface">Ghast</p>
+<p class="text-xs text-on-surface-variant font-mono">CR 2 • Undead</p>
+</div>
+<div class="flex gap-3">
+<span class="bg-tertiary-container/20 text-tertiary px-2 py-1 rounded text-xs font-mono border border-tertiary-container/30">HP: 36</span>
+<span class="bg-surface-bright text-on-surface-variant px-2 py-1 rounded text-xs font-mono border border-outline-variant/30">AC: 13</span>
+</div>
+</div>
+</div>
+<!-- Roster Item 3 -->
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded border border-outline-variant/20 hover:bg-surface-container-low transition-colors">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary focus:ring-offset-background bg-surface-container-lowest" type="checkbox"/>
+<div class="flex-1 flex justify-between items-center">
+<div>
+<p class="text-sm font-bold text-on-surface">Ghast</p>
+<p class="text-xs text-on-surface-variant font-mono">CR 2 • Undead</p>
+</div>
+<div class="flex gap-3">
+<span class="bg-tertiary-container/20 text-tertiary px-2 py-1 rounded text-xs font-mono border border-tertiary-container/30">HP: 36</span>
+<span class="bg-surface-bright text-on-surface-variant px-2 py-1 rounded text-xs font-mono border border-outline-variant/30">AC: 13</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<button class="btn-primary w-full py-3 px-4 rounded font-bold text-sm tracking-wide flex items-center justify-center gap-2 mt-2">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+            GENERATE &amp; ADD TO INITIATIVE
+        </button>
+</section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

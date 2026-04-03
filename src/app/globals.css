@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
+/* ============================================================
+   DYCERY TERMINAL — Design Tokens
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:              #0b1326;
+  --surface:         #0b1326;
+  --surface-dim:     #060e20;
+  --surface-low:     #131b2e;
+  --surface-mid:     #171f33;
+  --surface-high:    #222a3d;
+  --surface-hi:      #2d3449;
+  --surface-bright:  #31394d;
+
+  --primary:         #d0bcff;
+  --primary-dim:     #a078ff;
+  --primary-fixed:   #e9ddff;
+  --on-primary:      #3c0091;
+  --secondary:       #ffb95f;
+  --secondary-dim:   #ee9800;
+  --on-secondary:    #472a00;
+  --tertiary:        #ffb3ad;
+  --tertiary-dim:    #ff5451;
+  --on-tertiary:     #68000a;
+  --error:          #ffb4ab;
+
+  --on-bg:           #dae2fd;
+  --on-surface:      #dae2fd;
+  --on-surface-var:  #cbc3d7;
+  --outline:         #958ea0;
+  --outline-var:     #494454;
+
+  --radius-sm:   0.125rem;
+  --radius-md:   0.25rem;
+  --radius-lg:   0.5rem;
+  --radius-xl:   0.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-bg:             var(--bg);
+  --color-surface:        var(--surface);
+  --color-surface-dim:    var(--surface-dim);
+  --color-surface-low:   var(--surface-low);
+  --color-surface-mid:   var(--surface-mid);
+  --color-surface-high:  var(--surface-high);
+  --color-surface-hi:    var(--surface-hi);
+  --color-surface-bright: var(--surface-bright);
+
+  --color-primary:       var(--primary);
+  --color-primary-dim:   var(--primary-dim);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-on-primary:    var(--on-primary);
+  --color-secondary:     var(--secondary);
+  --color-secondary-dim: var(--secondary-dim);
+  --color-on-secondary:  var(--on-secondary);
+  --color-tertiary:      var(--tertiary);
+  --color-tertiary-dim:  var(--tertiary-dim);
+  --color-error:         var(--error);
+
+  --color-on-bg:         var(--on-bg);
+  --color-on-surface:    var(--on-surface);
+  --color-on-surface-var: var(--on-surface-var);
+  --color-outline:       var(--outline);
+  --color-outline-var:   var(--outline-var);
+
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body:     "Inter", sans-serif;
+  --font-mono:     "JetBrains Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(255,185,95,.3);
+  color: #ffddb8;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--surface-dim); }
+::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 2px; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+}
+
+.font-headline { font-family: var(--font-headline); }
+.font-mono     { font-family: var(--font-mono); }
+
+.glass-panel {
+  background: rgba(45,52,73,.5);
+  backdrop-filter: blur(12px);
+}
+
+.input-recessed {
+  background: var(--surface-dim);
+  border: 1px solid rgba(73,68,84,.3);
+  color: var(--on-surface);
+}
+.input-recessed:focus {
+  border-color: var(--secondary);
+  outline: none;
+  box-shadow: 0 0 0 1px var(--secondary);
 }

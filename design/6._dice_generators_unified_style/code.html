@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dycery Terminal | Precision Dice Roller</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#494454",
+                        "on-primary-container": "#340080",
+                        "on-tertiary-fixed-variant": "#930013",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-primary": "#6d3bd7",
+                        "inverse-on-surface": "#283044",
+                        "on-tertiary-container": "#5c0008",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#31394d",
+                        "secondary": "#ffb95f",
+                        "on-primary-fixed": "#23005c",
+                        "surface-container-lowest": "#060e20",
+                        "surface-container-high": "#222a3d",
+                        "on-secondary": "#472a00",
+                        "on-error": "#690005",
+                        "primary-container": "#a078ff",
+                        "surface-dim": "#0b1326",
+                        "secondary-container": "#ee9800",
+                        "surface-container": "#171f33",
+                        "on-background": "#dae2fd",
+                        "error-container": "#93000a",
+                        "background": "#0b1326",
+                        "on-surface": "#dae2fd",
+                        "inverse-surface": "#dae2fd",
+                        "tertiary-fixed": "#ffdad7",
+                        "on-tertiary-fixed": "#410004",
+                        "on-secondary-container": "#5b3800",
+                        "secondary-fixed": "#ffddb8",
+                        "surface": "#0b1326",
+                        "tertiary": "#ffb3ad",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "surface-tint": "#d0bcff",
+                        "surface-container-low": "#131b2e",
+                        "primary-fixed": "#e9ddff",
+                        "primary": "#d0bcff",
+                        "on-tertiary": "#68000a",
+                        "on-primary-fixed-variant": "#5516be",
+                        "tertiary-fixed-dim": "#ffb3ad",
+                        "surface-variant": "#2d3449",
+                        "on-secondary-fixed": "#2a1700",
+                        "error": "#ffb4ab",
+                        "outline": "#958ea0",
+                        "on-primary": "#3c0091",
+                        "tertiary-container": "#ff5451",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "primary-fixed-dim": "#d0bcff"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.5rem;
+        }
+        .terminal-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .terminal-scroll::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: #b45309;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-300 font-body antialiased selection:bg-amber-500/30 selection:text-amber-200">
+<!-- TopNavBar -->
+<nav class="flex justify-between items-center px-6 h-14 w-full fixed top-0 z-50 bg-slate-950 border-b border-amber-900/30 font-space-grotesk tracking-tighter uppercase">
+<div class="text-xl font-black text-amber-500 tracking-widest">Dycery Terminal</div>
+<div class="hidden md:flex items-center gap-8">
+<span class="text-slate-500 font-medium">Campaign: Shadow Over Oakhaven</span>
+<span class="text-slate-500 font-medium">02:45:12</span>
+<span class="text-slate-500 font-medium">Round 4</span>
+<span class="text-amber-400 font-bold border-b-2 border-amber-500 pb-1">CODE: XJ92</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-amber-300 hover:bg-amber-900/20 transition-colors p-2 rounded active:scale-95 duration-100">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 hover:text-amber-300 hover:bg-amber-900/20 transition-colors p-2 rounded active:scale-95 duration-100">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full border border-amber-500/50 overflow-hidden">
+<img alt="Game Master Profile" data-alt="Cyberpunk style game master avatar with glowing visor and dark metallic tech-wear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYel99S3T9VDhIt16dnKNvHdm4AAMi2ijj4CNLdGKcUPZWSBwr2qTycWTS5O4HvmPxH1ebljQ7joLn1shxT3IgamTL7AXxpKSBNEmACAhgmTHcf2u447kaPslrMVQo4ZY3A-9xp-JJIjXOAzs78oCKy40oTnRwcOg4hcHAR-Y5KpJWWmnSUelI2CBhqD3l5xG4vBBs8B33hKODydyueTySAkEWY5toElLZyuDfXVoUsP7L6-vxWukYwqwLTsjJa02BZmm7xMPZzmRh"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 flex flex-col pt-14 z-40 bg-slate-950 border-r border-amber-900/30 font-space-grotesk text-xs uppercase tracking-widest">
+<div class="p-6 border-b border-amber-900/10">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 bg-amber-500 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-950 text-sm" data-icon="terminal">terminal</span>
+</div>
+<div>
+<div class="text-amber-500 font-bold">Terminal V1.0</div>
+<div class="text-[10px] text-slate-500">System Online</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 py-4 overflow-y-auto">
+<a class="flex flex-row items-center gap-3 bg-amber-500/10 text-amber-400 border-r-2 border-amber-500 px-4 py-3 hover:bg-slate-900 hover:text-amber-200 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="casino">casino</span>
+<span>Dice Roller</span>
+</a>
+<a class="flex flex-row items-center gap-3 text-slate-500 px-4 py-3 hover:bg-slate-900 hover:text-amber-200 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="format_list_numbered">format_list_numbered</span>
+<span>Initiative</span>
+</a>
+<a class="flex flex-row items-center gap-3 text-slate-500 px-4 py-3 hover:bg-slate-900 hover:text-amber-200 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span>Active Quests</span>
+</a>
+<a class="flex flex-row items-center gap-3 text-slate-500 px-4 py-3 hover:bg-slate-900 hover:text-amber-200 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span>Map</span>
+</a>
+<a class="flex flex-row items-center gap-3 text-slate-500 px-4 py-3 hover:bg-slate-900 hover:text-amber-200 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>NPCs</span>
+</a>
+<a class="flex flex-row items-center gap-3 text-slate-500 px-4 py-3 hover:bg-slate-900 hover:text-amber-200 transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="Pets">pets</span>
+<span>Bestiary</span>
+</a>
+</nav>
+<div class="p-4 border-t border-amber-900/10">
+<a class="flex flex-row items-center gap-3 text-slate-500 px-4 py-2 hover:bg-slate-900 hover:text-amber-200 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span>Logs</span>
+</a>
+<a class="flex flex-row items-center gap-3 text-slate-500 px-4 py-2 hover:bg-slate-900 hover:text-amber-200 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-14 min-h-screen bg-slate-950">
+<div class="p-8 grid grid-cols-12 gap-8 max-w-7xl mx-auto">
+<!-- LEFT COLUMN: Dice Controls -->
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<!-- Precision Roller Card -->
+<section class="bg-slate-900/50 border border-amber-900/20 p-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-20 pointer-events-none">
+<span class="material-symbols-outlined text-6xl text-amber-500" data-icon="architecture">architecture</span>
+</div>
+<div class="flex flex-col md:flex-row gap-6 items-end">
+<div class="flex-1 w-full">
+<label class="block font-headline text-amber-500 text-xs uppercase tracking-widest mb-3">Precision Input</label>
+<div class="relative">
+<input class="w-full bg-slate-950 border-amber-900/30 text-amber-400 font-mono text-3xl p-4 focus:ring-0 focus:border-amber-500/50 placeholder:text-slate-800 transition-all uppercase" placeholder="2d20+5" type="text"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2 pointer-events-none">
+<span class="text-[10px] bg-amber-900/20 text-amber-500 px-2 py-1 border border-amber-500/20">CTRL</span>
+<span class="text-[10px] bg-amber-900/20 text-amber-500 px-2 py-1 border border-amber-500/20">ENTER</span>
+</div>
+</div>
+</div>
+<button class="w-full md:w-auto h-[74px] px-12 bg-amber-500 hover:bg-amber-400 text-slate-950 font-headline font-black text-2xl tracking-widest active:scale-95 transition-all shadow-lg shadow-amber-500/10">
+                            ROLL
+                        </button>
+</div>
+<!-- Quick Dice Buttons -->
+<div class="mt-8">
+<label class="block font-headline text-slate-500 text-[10px] uppercase tracking-widest mb-4">Quick Strike Array</label>
+<div class="dice-grid">
+<button class="flex flex-col items-center justify-center aspect-square bg-slate-950 border border-amber-900/20 hover:border-amber-500/50 hover:bg-amber-900/10 transition-all group/die">
+<span class="material-symbols-outlined text-amber-500 group-hover/die:scale-110 transition-transform" data-icon="change_history">change_history</span>
+<span class="font-mono text-xs mt-1 text-slate-500">D4</span>
+</button>
+<button class="flex flex-col items-center justify-center aspect-square bg-slate-950 border border-amber-900/20 hover:border-amber-500/50 hover:bg-amber-900/10 transition-all group/die">
+<span class="material-symbols-outlined text-amber-500 group-hover/die:scale-110 transition-transform" data-icon="check_box_outline_blank">check_box_outline_blank</span>
+<span class="font-mono text-xs mt-1 text-slate-500">D6</span>
+</button>
+<button class="flex flex-col items-center justify-center aspect-square bg-slate-950 border border-amber-900/20 hover:border-amber-500/50 hover:bg-amber-900/10 transition-all group/die">
+<span class="material-symbols-outlined text-amber-500 group-hover/die:scale-110 transition-transform" data-icon="square">square</span>
+<span class="font-mono text-xs mt-1 text-slate-500">D8</span>
+</button>
+<button class="flex flex-col items-center justify-center aspect-square bg-slate-950 border border-amber-900/20 hover:border-amber-500/50 hover:bg-amber-900/10 transition-all group/die">
+<span class="material-symbols-outlined text-amber-500 group-hover/die:scale-110 transition-transform" data-icon="diamond">diamond</span>
+<span class="font-mono text-xs mt-1 text-slate-500">D10</span>
+</button>
+<button class="flex flex-col items-center justify-center aspect-square bg-slate-950 border border-amber-900/20 hover:border-amber-500/50 hover:bg-amber-900/10 transition-all group/die">
+<span class="material-symbols-outlined text-amber-500 group-hover/die:scale-110 transition-transform" data-icon="pentagon">pentagon</span>
+<span class="font-mono text-xs mt-1 text-slate-500">D12</span>
+</button>
+<button class="flex flex-col items-center justify-center aspect-square bg-slate-950 border border-amber-900/20 hover:border-amber-500/50 hover:bg-amber-900/10 transition-all group/die border-amber-500/40 bg-amber-500/5">
+<span class="material-symbols-outlined text-amber-500 group-hover/die:scale-110 transition-transform" data-icon="hexagon" data-weight="fill" style="font-variation-settings: 'FILL' 1;">hexagon</span>
+<span class="font-mono text-xs mt-1 text-amber-500 font-bold">D20</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Session History -->
+<section class="bg-slate-950/40 border border-slate-800 p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline text-slate-200 text-sm font-bold uppercase tracking-[0.2em] flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-500" data-icon="history">history</span>
+                            Session History
+                        </h2>
+<span class="text-[10px] text-slate-600 font-mono">BUFFER_CLR: DISABLED</span>
+</div>
+<div class="space-y-3 terminal-scroll max-h-[400px] overflow-y-auto pr-2">
+<!-- History Item 1 -->
+<div class="p-4 bg-slate-900/30 border-l-2 border-amber-500 flex items-center justify-between group">
+<div class="flex items-center gap-6">
+<div class="font-mono text-amber-500 text-2xl font-bold">28</div>
+<div class="space-y-1">
+<div class="text-[10px] text-slate-500 font-mono uppercase">2d20[12, 11] + 5</div>
+<div class="text-[10px] text-slate-400">CRITICAL_CHALLENGE // DC 25</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-[10px] text-slate-600 font-mono">14:22:01</div>
+<div class="text-[10px] text-amber-500/50 font-bold uppercase tracking-tighter">SUCCESS</div>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="p-4 bg-slate-900/10 border-l-2 border-slate-700 flex items-center justify-between group">
+<div class="flex items-center gap-6">
+<div class="font-mono text-slate-400 text-2xl font-bold">09</div>
+<div class="space-y-1">
+<div class="text-[10px] text-slate-500 font-mono uppercase">1d12[4] + 5</div>
+<div class="text-[10px] text-slate-400">DAMAGE: FIRE_BREATH</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-[10px] text-slate-600 font-mono">14:18:54</div>
+<div class="text-[10px] text-slate-700 font-bold uppercase tracking-tighter">RESOLVED</div>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="p-4 bg-slate-900/10 border-l-2 border-tertiary flex items-center justify-between group">
+<div class="flex items-center gap-6">
+<div class="font-mono text-tertiary text-2xl font-bold">04</div>
+<div class="space-y-1">
+<div class="text-[10px] text-slate-500 font-mono uppercase">1d20[1] + 3</div>
+<div class="text-[10px] text-slate-400">SAVING_THROW: DEX</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-[10px] text-slate-600 font-mono">14:15:22</div>
+<div class="text-[10px] text-tertiary/50 font-bold uppercase tracking-tighter">FAIL_CRIT</div>
+</div>
+</div>
+<!-- History Item 4 -->
+<div class="p-4 bg-slate-900/10 border-l-2 border-slate-700 flex items-center justify-between group">
+<div class="flex items-center gap-6">
+<div class="font-mono text-slate-400 text-2xl font-bold">17</div>
+<div class="space-y-1">
+<div class="text-[10px] text-slate-500 font-mono uppercase">3d6[4, 5, 2] + 6</div>
+<div class="text-[10px] text-slate-400">HEALING_WORD: T2</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-[10px] text-slate-600 font-mono">14:12:10</div>
+<div class="text-[10px] text-slate-700 font-bold uppercase tracking-tighter">RESOLVED</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: Quick Generators -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline text-amber-500 text-xs uppercase tracking-widest font-bold">ORACLE_SUBSYSTEMS</h3>
+<div class="h-[1px] flex-1 bg-amber-900/20 ml-4"></div>
+</div>
+<!-- Weather Gen -->
+<div class="bg-slate-900/80 border border-slate-800 p-4 group hover:border-amber-500/30 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] text-slate-500 font-mono block mb-1">GEN: WEATHER</span>
+<h4 class="font-headline text-slate-200 text-sm font-bold uppercase">Thunderstorm</h4>
+</div>
+<button class="p-1 hover:text-amber-500 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+</button>
+</div>
+<p class="text-[11px] text-slate-400 leading-relaxed italic border-t border-slate-800/50 pt-2">
+                        Heavy precipitation reduces visibility. Ranged attacks have disadvantage. Lightning strikes on natural 1s.
+                    </p>
+</div>
+<!-- Tavern Name Gen -->
+<div class="bg-slate-900/80 border border-slate-800 p-4 group hover:border-amber-500/30 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] text-slate-500 font-mono block mb-1">GEN: TAVERN_ID</span>
+<h4 class="font-headline text-slate-200 text-sm font-bold uppercase">The Broken Hilt</h4>
+</div>
+<button class="p-1 hover:text-amber-500 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-2 border-t border-slate-800/50 pt-2">
+<div class="text-[10px] text-slate-500">ATMOS: <span class="text-amber-500/80">Rowdy</span></div>
+<div class="text-[10px] text-slate-500">PRICE: <span class="text-amber-500/80">Modest</span></div>
+</div>
+</div>
+<!-- Quick Loot Gen -->
+<div class="bg-slate-900/80 border border-slate-800 p-4 group hover:border-amber-500/30 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] text-slate-500 font-mono block mb-1">GEN: LOOT_TABLE</span>
+<h4 class="font-headline text-slate-200 text-sm font-bold uppercase">Small Pouch</h4>
+</div>
+<button class="p-1 hover:text-amber-500 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+</button>
+</div>
+<div class="space-y-1 border-t border-slate-800/50 pt-2 font-mono text-[10px]">
+<div class="flex justify-between">
+<span class="text-slate-500">CURRENCY</span>
+<span class="text-amber-500">12gp 8sp</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500">ITEM</span>
+<span class="text-slate-300 italic">Cracked Emerald</span>
+</div>
+</div>
+</div>
+<!-- Random NPC Gen -->
+<div class="bg-slate-900/80 border border-amber-500/20 p-4 group hover:border-amber-500/50 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] text-amber-500/50 font-mono block mb-1">GEN: ENTITY_NPC</span>
+<h4 class="font-headline text-amber-500 text-sm font-bold uppercase">Kaelen Vance</h4>
+</div>
+<button class="p-1 text-amber-500">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+</button>
+</div>
+<div class="space-y-2 border-t border-amber-900/20 pt-2">
+<div class="flex items-center gap-2">
+<span class="text-[10px] bg-slate-950 px-1.5 py-0.5 border border-slate-800 text-slate-400">Human</span>
+<span class="text-[10px] bg-slate-950 px-1.5 py-0.5 border border-slate-800 text-slate-400">Rogue (Lvl 3)</span>
+</div>
+<p class="text-[10px] text-slate-400 leading-tight">
+                            MOTIVE: Seeking lost family heirloom. <br/>
+                            QUIRK: Constantly flips a lead coin.
+                        </p>
+</div>
+</div>
+<!-- System Diagnostic Decorator -->
+<div class="mt-12 p-4 border border-slate-800 opacity-30 pointer-events-none">
+<div class="flex justify-between text-[8px] font-mono text-slate-600 mb-2">
+<span>CORE_TEMP: 34C</span>
+<span>LATENCY: 12ms</span>
+</div>
+<div class="h-1 w-full bg-slate-900 overflow-hidden">
+<div class="h-full w-2/3 bg-amber-900/40"></div>
+</div>
+<div class="mt-2 text-[8px] font-mono text-slate-600 uppercase">
+                        Active Process: Rolling_Engine_v4.2.0
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Suppression: Contextually suppressed as per guidelines for this task-focused screen -->
+</body></html>

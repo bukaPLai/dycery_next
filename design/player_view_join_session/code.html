@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dycery Terminal - Join Session</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#2d3449",
+                        "surface-container-low": "#131b2e",
+                        "on-primary": "#3c0091",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-secondary-container": "#5b3800",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-tertiary": "#68000a",
+                        "surface-container-high": "#222a3d",
+                        "on-primary-container": "#340080",
+                        "on-tertiary-container": "#5c0008",
+                        "surface": "#0b1326",
+                        "surface-container-highest": "#2d3449",
+                        "on-surface": "#dae2fd",
+                        "on-secondary": "#472a00",
+                        "surface-bright": "#31394d",
+                        "surface-dim": "#0b1326",
+                        "primary-fixed": "#e9ddff",
+                        "surface-container": "#171f33",
+                        "secondary": "#ffb95f",
+                        "tertiary-container": "#ff5451",
+                        "inverse-surface": "#dae2fd",
+                        "surface-tint": "#d0bcff",
+                        "on-secondary-fixed": "#2a1700",
+                        "tertiary-fixed-dim": "#ffb3ad",
+                        "tertiary-fixed": "#ffdad7",
+                        "tertiary": "#ffb3ad",
+                        "inverse-primary": "#6d3bd7",
+                        "surface-container-lowest": "#060e20",
+                        "on-tertiary-fixed": "#410004",
+                        "primary": "#d0bcff",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#283044",
+                        "on-error": "#690005",
+                        "secondary-container": "#ee9800",
+                        "on-background": "#dae2fd",
+                        "background": "#0b1326",
+                        "outline": "#958ea0",
+                        "outline-variant": "#494454",
+                        "primary-fixed-dim": "#d0bcff",
+                        "on-tertiary-fixed-variant": "#930013",
+                        "on-primary-fixed": "#23005c",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "primary-container": "#a078ff",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed": "#ffddb8"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .code-input {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        /* Custom scrollbar for terminal vibe */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1326; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #494454; 
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body antialiased selection:bg-primary selection:text-on-primary">
+<!-- Minimal Header (Back-to-Main Exception for Focused Views) -->
+<header class="flex items-center justify-between px-6 py-4 border-b border-surface-variant bg-surface sticky top-0 z-10">
+<a class="flex items-center gap-2 text-on-surface hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span class="font-label text-sm font-medium tracking-wide">Back to Menu</span>
+</a>
+<div class="flex items-center gap-3">
+<div class="size-5 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="font-headline text-lg font-bold tracking-tight text-on-surface">DYCERY TERMINAL</h2>
+</div>
+<div class="w-[100px]"></div> <!-- Spacer to center the logo -->
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex items-center justify-center p-6 relative overflow-hidden">
+<!-- Ambient Background Grid (Terminal Aesthetic) -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-20" style="background-image: radial-gradient(circle at 2px 2px, rgba(218, 226, 253, 0.15) 1px, transparent 0); background-size: 32px 32px;"></div>
+<div class="w-full max-w-md bg-surface-container border border-outline-variant rounded p-8 shadow-2xl relative z-10">
+<div class="text-center mb-8">
+<h1 class="font-headline text-3xl font-bold text-on-surface mb-2 tracking-tight">Establish Uplink</h1>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                    Enter the 6-character session code provided by your Dungeon Master to connect to the campaign matrix.
+                </p>
+</div>
+<div class="flex justify-center mb-8">
+<fieldset class="relative flex gap-3">
+<input class="code-input flex h-16 w-12 text-center text-2xl font-bold bg-surface border border-outline-variant rounded text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary uppercase transition-colors" maxlength="1" placeholder="-" type="text" value=""/>
+<input class="code-input flex h-16 w-12 text-center text-2xl font-bold bg-surface border border-outline-variant rounded text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary uppercase transition-colors" maxlength="1" placeholder="-" type="text" value=""/>
+<input class="code-input flex h-16 w-12 text-center text-2xl font-bold bg-surface border border-outline-variant rounded text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary uppercase transition-colors" maxlength="1" placeholder="-" type="text" value=""/>
+<div class="flex items-center justify-center w-4 text-outline-variant font-bold">-</div>
+<input class="code-input flex h-16 w-12 text-center text-2xl font-bold bg-surface border border-outline-variant rounded text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary uppercase transition-colors" maxlength="1" placeholder="-" type="text" value=""/>
+<input class="code-input flex h-16 w-12 text-center text-2xl font-bold bg-surface border border-outline-variant rounded text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary uppercase transition-colors" maxlength="1" placeholder="-" type="text" value=""/>
+<input class="code-input flex h-16 w-12 text-center text-2xl font-bold bg-surface border border-outline-variant rounded text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary uppercase transition-colors" maxlength="1" placeholder="-" type="text" value=""/>
+</fieldset>
+</div>
+<!-- Terminal Status Message -->
+<div class="flex items-center justify-center gap-2 mb-8 text-secondary font-label text-sm animate-pulse opacity-80">
+<span class="material-symbols-outlined text-[16px]">wifi_tethering</span>
+<span>Awaiting DM connection...</span>
+</div>
+<button class="w-full flex items-center justify-center gap-2 h-14 bg-secondary hover:bg-secondary-container text-on-secondary font-headline text-base font-bold rounded tracking-widest transition-colors shadow-[0_0_15px_rgba(255,185,95,0.2)] hover:shadow-[0_0_20px_rgba(255,185,95,0.4)]">
+<span class="material-symbols-outlined text-[20px]">login</span>
+                INITIALIZE JOIN
+            </button>
+<div class="mt-6 text-center">
+<a class="text-xs text-primary hover:text-primary-fixed underline decoration-primary/30 underline-offset-4 transition-colors" href="#">Where do I find my code?</a>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Arcanist's Terminal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "inverse-primary": "#6d3bd7",
+          "primary-container": "#a078ff",
+          "secondary-fixed-dim": "#ffb95f",
+          "on-tertiary-fixed": "#410004",
+          "inverse-on-surface": "#283044",
+          "on-error": "#690005",
+          "on-primary-fixed": "#23005c",
+          "surface-bright": "#31394d",
+          "tertiary-container": "#ff5451",
+          "background": "#0b1326",
+          "outline-variant": "#494454",
+          "on-primary-fixed-variant": "#5516be",
+          "surface-container-low": "#131b2e",
+          "primary": "#d0bcff",
+          "secondary-container": "#ee9800",
+          "tertiary": "#ffb3ad",
+          "error-container": "#93000a",
+          "inverse-surface": "#dae2fd",
+          "secondary-fixed": "#ffddb8",
+          "on-tertiary-fixed-variant": "#930013",
+          "surface-container-highest": "#2d3449",
+          "primary-fixed-dim": "#d0bcff",
+          "surface": "#0b1326",
+          "on-secondary-fixed-variant": "#653e00",
+          "tertiary-fixed-dim": "#ffb3ad",
+          "on-secondary-fixed": "#2a1700",
+          "on-surface": "#dae2fd",
+          "on-secondary": "#472a00",
+          "surface-tint": "#d0bcff",
+          "surface-container": "#171f33",
+          "primary-fixed": "#e9ddff",
+          "tertiary-fixed": "#ffdad7",
+          "on-primary-container": "#340080",
+          "on-tertiary": "#68000a",
+          "surface-dim": "#0b1326",
+          "surface-variant": "#2d3449",
+          "surface-container-high": "#222a3d",
+          "on-background": "#dae2fd",
+          "on-tertiary-container": "#5c0008",
+          "on-error-container": "#ffdad6",
+          "surface-container-lowest": "#060e20",
+          "on-secondary-container": "#5b3800",
+          "error": "#ffb4ab",
+          "secondary": "#ffb95f",
+          "outline": "#958ea0",
+          "on-primary": "#3c0091",
+          "on-surface-variant": "#cbc3d7"
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk", "sans-serif"],
+          "body": ["Inter", "sans-serif"],
+          "label": ["Inter", "sans-serif"],
+          "mono": ["JetBrains Mono", "monospace"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background-color: #0b1326; color: #dae2fd; }
+  h1, h2, h3, h4, h5, h6, .headline { font-family: 'Space Grotesk', sans-serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .glass { background: rgba(45, 52, 73, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(73, 68, 84, 0.15); }
+  .gradient-btn { background: linear-gradient(180deg, theme('colors.primary') 0%, theme('colors.primary-container') 100%); }
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col overflow-x-hidden">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background dark group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#2e2249] px-10 py-3 bg-surface-container-highest">
+<div class="flex items-center gap-4 text-on-surface">
+<div class="size-6">
+<span class="material-symbols-outlined text-primary" data-icon="terminal" data-weight="fill" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9 text-on-surface-variant font-label text-sm">
+<a class="hover:text-primary transition-colors cursor-pointer" href="#">Dashboard</a>
+<a class="hover:text-primary transition-colors cursor-pointer" href="#">Inventory</a>
+<a class="hover:text-primary transition-colors cursor-pointer" href="#">Quests</a>
+<a class="hover:text-primary transition-colors cursor-pointer" href="#">Guild</a>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg px-4 bg-surface-container-low text-on-surface border border-outline-variant/20 hover:bg-surface-container transition-colors text-sm font-label h-10">
+<span class="material-symbols-outlined mr-2 text-[18px]" data-icon="search">search</span>
+                Search
+              </button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg px-4 gradient-btn text-on-primary-fixed font-bold text-sm h-10 hover:opacity-90 transition-opacity">
+                Connect Wallet
+              </button>
+</div>
+</div>
+</header>
+<main class="flex-1 p-8 grid grid-cols-12 gap-6 font-body">
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<div class="bg-surface-container rounded-lg p-6 flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full bg-surface-container-high border-2 border-primary overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a fantasy wizard character with a glowing blue eye and a dark hood in a moody, low-light setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPsTeEzXf-EVEHzTCfL_NzIozYBHDpCZ9E9Jz_y-Q4gF4rpfujEyA5Z2-cZJduqXHeJnzg2Z6BIJaZOEztk9zGoTL2ZAz4khlbpnv41K4FWKatM9fQH3rS3dOQFjApa-hIOsQKXedteX4IP-qYGR8Hj6CF8rNFMsjXnNeeMWRewo9MdusIMBXeXbQ8zAlGr7bBeh9v6Rkom-5mS29y8fdTp4Ct8V-W9R7worktiVycHHYkwx71qcftXSiDNCiGZPsFIrTuIbB9Dx60"/>
+</div>
+<div>
+<h2 class="font-headline text-2xl font-bold text-on-surface">Elyndor</h2>
+<p class="text-on-surface-variant text-sm font-mono">Lvl 42 Arcane Mage</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 mt-2">
+<div>
+<div class="flex justify-between text-xs mb-1 font-mono">
+<span class="text-tertiary">HP</span>
+<span class="text-on-surface">1250 / 1500</span>
+</div>
+<div class="w-full h-1 bg-surface-container-lowest">
+<div class="h-full bg-tertiary w-[83%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1 font-mono">
+<span class="text-secondary">MP</span>
+<span class="text-on-surface">3200 / 3200</span>
+</div>
+<div class="w-full h-1 bg-surface-container-lowest">
+<div class="h-full bg-secondary w-[100%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1 font-mono">
+<span class="text-primary">XP</span>
+<span class="text-on-surface">45.2k / 50k</span>
+</div>
+<div class="w-full h-1 bg-surface-container-lowest">
+<div class="h-full bg-primary w-[90%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-lg p-6 flex flex-col gap-4">
+<h3 class="font-headline text-lg font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="swords">swords</span>
+                Active Quests
+              </h3>
+<div class="flex flex-col gap-3">
+<div class="bg-surface-container-low p-4 rounded hover:bg-surface-container-high transition-colors cursor-pointer border border-transparent hover:border-outline-variant/20">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-sm text-on-surface">The Obsidian Citadel</h4>
+<span class="text-xs font-mono text-secondary bg-secondary-container/20 px-2 py-1 rounded">In Progress</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-3">Recover the lost artifact from the lower depths before the shadow moon rises.</p>
+<div class="flex items-center gap-2 text-xs font-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+<span>14:22:05</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded hover:bg-surface-container-high transition-colors cursor-pointer border border-transparent hover:border-outline-variant/20">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-sm text-on-surface">Gather Ether Blooms</h4>
+<span class="text-xs font-mono text-primary bg-primary-container/20 px-2 py-1 rounded">Ready</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-3">Collect rare flora for the alchemist's grand experiment.</p>
+<div class="flex items-center gap-2 text-xs font-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="eco">eco</span>
+<span>12/15</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<div class="bg-surface-container rounded-lg p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline text-xl font-bold text-on-surface">Inventory Terminal</h3>
+<div class="flex gap-2">
+<button class="bg-surface-container-high text-on-surface px-3 py-1.5 rounded text-xs font-mono hover:bg-surface-container-highest">Weapons</button>
+<button class="bg-surface-container-lowest text-on-surface-variant px-3 py-1.5 rounded text-xs font-mono border border-outline-variant/20">Armor</button>
+<button class="bg-surface-container-lowest text-on-surface-variant px-3 py-1.5 rounded text-xs font-mono border border-outline-variant/20">Consumables</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="bg-surface-container-low p-3 flex gap-4 items-center group hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant/20">
+<div class="w-12 h-12 bg-surface-container-lowest border border-outline-variant/20 rounded flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[24px]" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Staff of the Cosmos</h4>
+<p class="text-xs text-on-surface-variant line-clamp-1">Legendary Two-Handed Weapon</p>
+</div>
+<div class="text-right flex flex-col justify-center">
+<span class="text-xs font-mono text-secondary">ATK 450</span>
+<button class="text-[10px] uppercase font-bold text-primary mt-1 hover:text-primary-container">Equip</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 flex gap-4 items-center group hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant/20">
+<div class="w-12 h-12 bg-surface-container-lowest border border-outline-variant/20 rounded flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[24px]" data-icon="book">book</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Grimoire of Shadows</h4>
+<p class="text-xs text-on-surface-variant line-clamp-1">Off-hand Artifact</p>
+</div>
+<div class="text-right flex flex-col justify-center">
+<span class="text-xs font-mono text-secondary">INT +45</span>
+<button class="text-[10px] uppercase font-bold text-on-surface-variant mt-1 hover:text-on-surface">View</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 flex gap-4 items-center group hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant/20">
+<div class="w-12 h-12 bg-surface-container-lowest border border-outline-variant/20 rounded flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[24px]" data-icon="shield">shield</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Aegis of the Fallen</h4>
+<p class="text-xs text-on-surface-variant line-clamp-1">Epic Shield</p>
+</div>
+<div class="text-right flex flex-col justify-center">
+<span class="text-xs font-mono text-secondary">DEF 320</span>
+<button class="text-[10px] uppercase font-bold text-on-surface-variant mt-1 hover:text-on-surface">View</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 flex gap-4 items-center group hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant/20">
+<div class="w-12 h-12 bg-surface-container-lowest border border-outline-variant/20 rounded flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface text-[24px]" data-icon="water_drop">water_drop</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Elixir of True Sight</h4>
+<p class="text-xs text-on-surface-variant line-clamp-1">Rare Consumable</p>
+</div>
+<div class="text-right flex flex-col justify-center">
+<span class="text-xs font-mono text-secondary">QTY: 3</span>
+<button class="text-[10px] uppercase font-bold text-primary mt-1 hover:text-primary-container">Use</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-lg p-6">
+<h3 class="font-headline text-lg font-bold text-on-surface mb-4">Market Terminal</h3>
+<div class="bg-surface-container-lowest p-4 rounded border border-outline-variant/20">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm text-on-surface-variant">Current Gold Balance</span>
+<span class="text-2xl font-mono text-secondary font-bold">14,205.00 <span class="text-sm">G</span></span>
+</div>
+<div class="h-px w-full bg-outline-variant/30 my-4"></div>
+<div class="flex gap-4">
+<input class="flex-1 bg-surface-container-low border border-outline-variant/20 rounded px-4 py-2 text-sm text-on-surface font-mono focus:outline-none focus:border-secondary transition-colors placeholder:text-on-surface-variant/50" placeholder="Enter amount to transfer..." type="text"/>
+<button class="px-6 py-2 bg-secondary/10 text-secondary border border-secondary/30 rounded font-bold text-sm hover:bg-secondary/20 transition-colors">Transfer</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Dycery's Terminal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          primary: "#FFB042",
+          "background-light": "#F8FAFC",
+          "background-dark": "#0B101E",
+          "surface-light": "#FFFFFF",
+          "surface-dark": "#131A2A",
+          "border-dark": "#2A344A",
+          "muted-dark": "#8B9BB4",
+        },
+        fontFamily: {
+          display: ["'Playfair Display'", "serif"],
+          sans: ["'Inter'", "sans-serif"],
+        },
+        borderRadius: {
+          DEFAULT: "0.5rem",
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  .display-font {
+    font-family: 'Playfair Display', serif;
+  }
+  .glass-card {
+    background: linear-gradient(145deg, rgba(19, 26, 42, 0.9) 0%, rgba(15, 20, 33, 0.95) 100%);
+    border: 1px solid rgba(42, 52, 74, 0.6);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .glass-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 176, 66, 0.4);
+    box-shadow: 0 12px 40px 0 rgba(255, 176, 66, 0.1);
+  }
+  .icon-gradient {
+    background: linear-gradient(135deg, #FFB042 0%, #FF8F00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary selection:text-white">
+<div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none z-0"></div>
+<nav class="relative z-10 w-full px-8 py-6 flex items-center justify-between border-b border-gray-200 dark:border-border-dark bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center gap-12">
+<div class="display-font font-black text-xl tracking-wider text-primary leading-tight">
+        DYCERY<br/>TERMINAL
+      </div>
+<div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600 dark:text-muted-dark">
+<a class="hover:text-primary transition-colors" href="#">Campaigns</a>
+<a class="text-gray-900 dark:text-white bg-gray-200 dark:bg-white/10 px-3 py-1 rounded-md" href="#">Codex</a>
+<a class="hover:text-primary transition-colors" href="#">Archives</a>
+</div>
+</div>
+<div class="flex items-center gap-6 text-gray-600 dark:text-muted-dark">
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">volume_up</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">contrast</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">settings</span></button>
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-green-400 to-emerald-600 border-2 border-surface-light dark:border-surface-dark"></div>
+</div>
+</nav>
+<main class="relative z-10 flex-grow flex flex-col items-center px-6 py-20 w-full max-w-7xl mx-auto">
+<section class="text-center w-full max-w-4xl mx-auto mb-24 flex flex-col items-center">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gray-200 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-xs font-semibold tracking-widest text-gray-600 dark:text-muted-dark mb-8">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        SYSTEM ONLINE: V4.2.0
+      </div>
+<h1 class="display-font text-5xl md:text-7xl font-black text-gray-900 dark:text-primary mb-6 leading-tight tracking-tight">
+        THE DYCERY'S<br/>TERMINAL
+      </h1>
+<p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl font-light">
+        The Bloomberg Terminal for Game Masters. High-density data, sub-millisecond precision, and pure arcane efficiency.
+      </p>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<button class="flex items-center gap-3 bg-primary text-gray-900 font-bold px-8 py-4 rounded hover:bg-opacity-90 transition-all shadow-lg shadow-primary/20">
+          OPEN THE APP
+          <span class="material-symbols-outlined">terminal</span>
+</button>
+<button class="flex items-center gap-3 bg-transparent border border-gray-300 dark:border-border-dark text-gray-700 dark:text-gray-300 font-semibold px-8 py-4 rounded hover:bg-gray-100 dark:hover:bg-white/5 transition-all">
+          PLAYER VIEW
+          <span class="material-symbols-outlined">group</span>
+</button>
+</div>
+</section>
+<section class="w-full">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="glass-card rounded-xl p-8 flex flex-col lg:col-span-2">
+<div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl icon-gradient">casino</span>
+</div>
+<div class="mt-auto">
+<div class="text-xs font-bold tracking-widest text-primary/80 mb-2">MODULE 01</div>
+<h3 class="display-font text-2xl font-bold mb-3 text-gray-900 dark:text-white">Dice Engine</h3>
+<p class="text-gray-600 dark:text-muted-dark text-sm leading-relaxed max-w-md">
+              Physics-simulated rolling with instant math resolution and critical hit detection. Experience the tactile thrill of the roll with digital precision.
+            </p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-8 flex flex-col">
+<div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl icon-gradient">format_list_numbered</span>
+</div>
+<div class="mt-auto">
+<h3 class="display-font text-2xl font-bold mb-3 text-gray-900 dark:text-white">Initiative</h3>
+<p class="text-gray-600 dark:text-muted-dark text-sm leading-relaxed">
+              Real-time turn tracking. Maintain flow and keep players engaged without the administrative overhead.
+            </p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-8 flex flex-col">
+<div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl icon-gradient">timer</span>
+</div>
+<div class="mt-auto">
+<h3 class="display-font text-2xl font-bold mb-3 text-gray-900 dark:text-white">Turn Timer</h3>
+<p class="text-gray-600 dark:text-muted-dark text-sm leading-relaxed">
+              Keep the combat flow lethal and fast. Enforce decision-making under pressure with elegant temporal constraints.
+            </p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-8 flex flex-col">
+<div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl icon-gradient">swords</span>
+</div>
+<div class="mt-auto">
+<h3 class="display-font text-2xl font-bold mb-3 text-gray-900 dark:text-white">Encounter Builder</h3>
+<p class="text-gray-600 dark:text-muted-dark text-sm leading-relaxed">
+              Dynamic CR scaling and intelligent loot tables to craft perfectly balanced, memorable battles on the fly.
+            </p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-8 flex flex-col">
+<div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl icon-gradient">map</span>
+</div>
+<div class="mt-auto">
+<h3 class="display-font text-2xl font-bold mb-3 text-gray-900 dark:text-white">Quest Log</h3>
+<p class="text-gray-600 dark:text-muted-dark text-sm leading-relaxed">
+              Graph-based narrative tracking. Visualize branching storylines, NPC relationships, and campaign progression seamlessly.
+            </p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-8 flex flex-col lg:col-span-3 items-center text-center">
+<div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl icon-gradient">auto_awesome</span>
+</div>
+<div class="max-w-2xl">
+<h3 class="display-font text-2xl font-bold mb-3 text-gray-900 dark:text-white">Procedural Generators</h3>
+<p class="text-gray-600 dark:text-muted-dark text-sm leading-relaxed">
+              Instant generation of authentic names, rich lore fragments, immersive taverns, and meaningful loot. Never get caught unprepared when players ask unexpected questions.
+            </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="relative z-10 w-full py-8 mt-12 text-center border-t border-gray-200 dark:border-border-dark">
+<p class="text-[10px] tracking-widest text-gray-500 dark:text-muted-dark font-medium uppercase">
+      Works Offline. Runs in your browser. © 2024 Arcanist Labs.
+    </p>
+</footer>
+
+</body></html>
