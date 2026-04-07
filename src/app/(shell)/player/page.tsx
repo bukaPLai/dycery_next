@@ -39,51 +39,13 @@ const SkullIcon = () => (
   </svg>
 );
 
-interface MenuItemProps {
-  icon: React.ReactNode;
-  label: string;
-  isActive?: boolean;
-  onClick?: () => void;
-}
-
-const MenuItem: React.FC<MenuItemProps> = ({ icon, label, isActive = false, onClick }) => {
-  const baseClasses = "flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer";
-  const activeClasses = "bg-[#2d3449]";
-  const hoverClasses = "hover:bg-[#222a3d]";
-  
-  return (
-    <div 
-      className={`${baseClasses} ${isActive ? activeClasses : hoverClasses}`}
-      onClick={onClick}
-    >
-      <div className={isActive ? "text-[#d0bcff]" : "text-[#cbc3d7]"}>
-        {icon}
-      </div>
-      <p className={`text-sm font-medium leading-normal font-['Inter'] ${isActive ? "text-[#dae2fd]" : "text-[#cbc3d7]"}`}>
-        {label}
-      </p>
-    </div>
-  );
-};
-
 export default function PlayerPage() {
-  const [activeMenu, setActiveMenu] = React.useState('dice-roller');
-
-  const menuItems = [
-    { id: 'dice-roller', icon: <DiceSixIcon />, label: 'Dice Roller' },
-    { id: 'initiative', icon: <SwordIcon />, label: 'Initiative' },
-    { id: 'active-quests', icon: <ScrollIcon />, label: 'Active Quests' },
-    { id: 'map', icon: <MapPinIcon />, label: 'Map' },
-    { id: 'npcs', icon: <UsersIcon />, label: 'NPCs' },
-    { id: 'bestiary', icon: <SkullIcon />, label: 'Bestiary' },
-  ];
-
   return (
-    <div className="relative flex h-auto min-h-screen w-full flex-col bg-[#0b1326] overflow-x-hidden">
-      <div className="flex h-full grow flex-col">
+    <div className="relative flex h-auto min-h-screen w-full flex-col bg-background dark group/design-root overflow-x-hidden font-headline">
+      <div className="layout-container flex h-full grow flex-col">
         <div className="px-40 flex flex-1 justify-center py-5">
-          <div className="flex flex-col max-w-[960px] flex-1">
-            <div className="flex h-full min-h-[700px] flex-col justify-between bg-[#131b2e] p-4 rounded-xl border border-[#2d3449]">
+          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div className="flex h-full min-h-[700px] flex-col justify-between bg-surface-low p-4 rounded-xl border border-surface-hi">
               <div className="flex flex-col gap-4">
                 {/* Header */}
                 <div className="flex gap-3">
@@ -94,10 +56,10 @@ export default function PlayerPage() {
                     }}
                   />
                   <div className="flex flex-col">
-                    <h1 className="text-[#dae2fd] text-base font-medium leading-normal text-[length:var(--text-base)] font-['Space_Grotesk']">
+                    <h1 className="text-on-surface text-base font-medium leading-normal font-headline">
                       Dycery Terminal
                     </h1>
-                    <p className="text-[#cbc3d7] text-sm font-normal leading-normal font-['Inter']">
+                    <p className="text-on-surface-var text-sm font-normal leading-normal font-body">
                       Campaign Manager
                     </p>
                   </div>
@@ -105,15 +67,65 @@ export default function PlayerPage() {
 
                 {/* Navigation Menu */}
                 <div className="flex flex-col gap-2">
-                  {menuItems.map((item) => (
-                    <MenuItem
-                      key={item.id}
-                      icon={item.icon}
-                      label={item.label}
-                      isActive={activeMenu === item.id}
-                      onClick={() => setActiveMenu(item.id)}
-                    />
-                  ))}
+                  {/* Dice Roller - Primary/Active */}
+                  <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-hi">
+                    <div className="text-primary">
+                      <DiceSixIcon />
+                    </div>
+                    <p className="text-on-surface text-sm font-medium leading-normal font-label">
+                      Dice Roller
+                    </p>
+                  </div>
+
+                  {/* Initiative */}
+                  <div className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-high transition-colors cursor-pointer">
+                    <div className="text-on-surface-var">
+                      <SwordIcon />
+                    </div>
+                    <p className="text-on-surface-var text-sm font-medium leading-normal font-label">
+                      Initiative
+                    </p>
+                  </div>
+
+                  {/* Active Quests */}
+                  <div className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-high transition-colors cursor-pointer">
+                    <div className="text-on-surface-var">
+                      <ScrollIcon />
+                    </div>
+                    <p className="text-on-surface-var text-sm font-medium leading-normal font-label">
+                      Active Quests
+                    </p>
+                  </div>
+
+                  {/* Map */}
+                  <div className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-high transition-colors cursor-pointer">
+                    <div className="text-on-surface-var">
+                      <MapPinIcon />
+                    </div>
+                    <p className="text-on-surface-var text-sm font-medium leading-normal font-label">
+                      Map
+                    </p>
+                  </div>
+
+                  {/* NPCs */}
+                  <div className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-high transition-colors cursor-pointer">
+                    <div className="text-on-surface-var">
+                      <UsersIcon />
+                    </div>
+                    <p className="text-on-surface-var text-sm font-medium leading-normal font-label">
+                      NPCs
+                    </p>
+                  </div>
+
+                  {/* Bestiary */}
+                  <div className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-surface-high transition-colors cursor-pointer">
+                    <div className="text-on-surface-var">
+                      <SkullIcon />
+                    </div>
+                    <p className="text-on-surface-var text-sm font-medium leading-normal font-label">
+                      Bestiary
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
