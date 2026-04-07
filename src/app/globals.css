@@ -42,11 +42,18 @@
   --color-bg:             var(--bg);
   --color-surface:        var(--surface);
   --color-surface-dim:    var(--surface-dim);
-  --color-surface-low:   var(--surface-low);
-  --color-surface-mid:   var(--surface-mid);
-  --color-surface-high:  var(--surface-high);
-  --color-surface-hi:    var(--surface-hi);
+  --color-surface-low:    var(--surface-low);
+  --color-surface-mid:    var(--surface-mid);
+  --color-surface-high:   var(--surface-high);
+  --color-surface-hi:     var(--surface-hi);
   --color-surface-bright: var(--surface-bright);
+
+  /* Design system alias names */
+  --color-surface-container-lowest: var(--surface-dim);
+  --color-surface-container-low:   var(--surface-low);
+  --color-surface-container:       var(--surface-mid);
+  --color-surface-container-high:  var(--surface-high);
+  --color-surface-container-highest: var(--surface-hi);
 
   --color-primary:       var(--primary);
   --color-primary-dim:   var(--primary-dim);
